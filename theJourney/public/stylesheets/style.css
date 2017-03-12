@@ -1,8 +1,35 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+body{
+  margin:0;
 }
 
-a {
-  color: #00B7FF;
+#background{
+  min-width: 100%;
+  max-height:100%;
+  background-color: #1E1E1E;
+}
+
+#mapDiv{
+  padding-top: 5vh;
+  padding-bottom: 5vh;
+  height: 90vh;
+}
+
+#map{
+  padding: 0;
+  height: 100%; 
+  width: 100%;
+  z-index: -1;
+}
+
+
+
+#ship{
+  position:absolute;
+  height: 5vh;
+  right: 9vw;
+  top: 17vh;
+}
+
+#theShip{
+  height:10vh;
 }
