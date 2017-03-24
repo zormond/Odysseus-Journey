@@ -101,67 +101,73 @@ swal({
         endPointY = wH * .65;
         angle2 = 40;
         myShip.animate({path : new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2)),},1500, 'linear',function(e) {
-            endPointX = wW * .13; endPointY =  wH * .75; angle1 = 0; angle2 = 0;
-            myShip.animate({path : new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, 1500,'linear', function()//first top
+            endPointX = wW * .25; endPointY =  wH * .65; angle1 = 0; angle2 = 0;
+            myShip.animate({path : new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, 1500,'linear', function()
             {
-                $("#seaWaves")[0].pause();
-                swal(getSwalStop(1,options1)).then(function(result){
-                    swal(onwardSwal(result)).then(function(){
-                            endPointX = wW * .25; endPointY = wH * .11; angle1 = 10; angle2 = 17;
-                            myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, 1500, 'linear', function()//second stop
-                            {
-                                $("#seaWaves")[0].pause();  
-                                swal(getSwalStop(2,options2)).then(function(result){
-                                    swal(onwardSwal(result)).then(function(){
-                                    endPointX = wW * .20; endPointY = wH * .06; angle1 = 0; angle2 = 0;
-                                    myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, 1500, 'linear',function()//third stop
-                                    {
-                                        $("#seaWaves")[0].pause();
-                                        swal(getSwalStop(3,options3)).then(function(result){
-                                            swal(onwardSwal(result)).then(function(){
-                                                endPointX = wW * .29; endPointY = wH * .14; angle1 = 0; angle2 = 0;
-                                                myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, 1500, 'linear',function()//fourth stop
-                                                {
-                                                    $("#seaWaves")[0].pause();  
-                                                    swal(getSwalStop(4,options4)).then(function(result){
-                                                        swal(onwardSwal(result)).then(function(){
-                                                            endPointX = wW * .33; endPointY = wH * .30; angle1 = 0; angle2 = 0;
-                                                            myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, 1500, 'linear',function()//fifth stop
-                                                            {
-                                                                $("#seaWaves")[0].pause();
-                                                                swal(getSwalStop(5,options5)).then(function(result){
-                                                                    swal(onwardSwal(result)).then(function(){
-                                                                        endPointX = wW * .30; endPointY = wH * .59; angle1 = 318.565; angle2 = 62.452;
-                                                                        myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, 1500, 'linear',function()//sixth stop
-                                                                        {
-                                                                            $("#seaWaves")[0].pause(); 
-                                                                            swal(getSwalStop(6,options6)).then(function(result){
-                                                                                swal(onwardSwal(result)).then(function(){
-                                                                                    endPointX = wW * .63; endPointY = wH * .34; angle1 = 0; angle2 = 0;
-                                                                                    myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, 1500, 'linear',function()//final stop
-                                                                                    {
-                                                                                        $("#seaWaves")[0].pause();
-                                                                                        swal(getSwalStop(7,options7)).then(function(result){
-                                                                                            swal(onwardSwal(result));
+                endPointX = wW * .10; endPointY =  wH * .40; angle1 = 0; angle2 = 0;
+                myShip.animate({path : new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, 1500, 'linear', function(){//first stop
+                    $("#seaWaves")[0].pause();
+                    swal(getSwalStop(1,options1)).then(function(result){
+                        swal(onwardSwal(result)).then(function(){
+                                endPointX = wW * .15; endPointY = wH * .60; angle1 = 10; angle2 = 17;
+                                myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, 1500, 'linear', function()//second stop
+                                {
+                                    $("#seaWaves")[0].pause();  
+                                    swal(getSwalStop(2,options2)).then(function(result){
+                                        swal(onwardSwal(result)).then(function(){
+                                        endPointX = wW * .11; endPointY = wH * .15; angle1 = 45; angle2 = 329;
+                                        myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, 1500, 'linear',function()//third stop
+                                        {
+                                            $("#seaWaves")[0].pause();
+                                            swal(getSwalStop(3,options3)).then(function(result){
+                                                swal(onwardSwal(result)).then(function(){
+                                                    endPointX = wW * .16; endPointY = wH * .10; angle1 = 343; angle2 = 30;
+                                                    myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, 1500, 'linear',function()//fourth stop
+                                                    {
+                                                        $("#seaWaves")[0].pause();  
+                                                        swal(getSwalStop(4,options4)).then(function(result){
+                                                            swal(onwardSwal(result)).then(function(){
+                                                                endPointX = wW * .25; endPointY = wH * .35; angle1 = 33; angle2 = 315;
+                                                                myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, 1500, 'linear',function()//fifth stop
+                                                                {
+                                                                    $("#seaWaves")[0].pause();
+                                                                    swal(getSwalStop(5,options5)).then(function(result){
+                                                                        swal(onwardSwal(result)).then(function(){
+                                                                            endPointX = wW * .37; endPointY = wH * .63; angle1 = 326.565; angle2 = 47.452;
+                                                                            myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, 1500, 'linear',function()//sixth stop
+                                                                            {
+                        
+                                                                                endPointX = wW * .45; endPointY = wH * .34; angle1 =44; angle2 = 317;
+                                                                                myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, 1500, 'linear',function()//final stop
+                                                                                {
+                                                                                    $("#seaWaves")[0].pause();
+                                                                                    swal(getSwalStop(6,options6)).then(function(result){
+                                                                                        swal(onwardSwal(result)).then(function()
+                                                                                        {
+                                                                                            endPointX = wW * .55; endPointY = wH * .50; angle1 =44; angle2 = 317; 
+                                                                                            myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, 1500, 'linear',function(){
+                                                                                                
+                                                                                            });
                                                                                         });
                                                                                     });
                                                                                 });
-                                                                            });
-                                                                        });                                                                                                                      
-                                                                    }); 
-                                                                });
-                                                            });                                                        
-                                                        });
-                                                    })
-                                                });                                                   
-                                            });
+                                                                            });                                                                                                                      
+                                                                        }); 
+                                                                    });
+                                                                });                                                        
+                                                            });
+                                                        })
+                                                    });                                                   
+                                                });
+                                            });  
                                         });  
-                                    });  
+                                    });
                                 });
                             });
                         });
                     });
                 });
+
             });
         });
     });   
