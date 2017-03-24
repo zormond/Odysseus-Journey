@@ -110,18 +110,18 @@ swal({
             endPointX = wW * .25; endPointY =  wH * .65; angle1 = 0; angle2 = 0;
             myShip.animate({path : new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, 1500,'linear', function()
             {
-                endPointX = wW * .10; endPointY =  wH * .40; angle1 = 0; angle2 = 0;
+                endPointX = wW * .07; endPointY =  wH * .40; angle1 = 0; angle2 = 0;
                 myShip.animate({path : new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, 1500, 'linear', function(){//first stop
                     $("#seaWaves")[0].pause();
                     swal(getSwalStop("The Lotus Eaters",options1)).then(function(result){
                         swal(onwardSwal(result)).then(function(){
-                                endPointX = wW * .15; endPointY = wH * .60; angle1 = 10; angle2 = 17;
+                                endPointX = wW * .12; endPointY = wH * .63; angle1 = 10; angle2 = 17;
                                 myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, 1500, 'linear', function()//second stop
                                 {
                                     $("#seaWaves")[0].pause();  
                                     swal(getSwalStop("The Cyclops",options2)).then(function(result){
                                         swal(onwardSwal(result)).then(function(){
-                                        endPointX = wW * .11; endPointY = wH * .15; angle1 = 45; angle2 = 329;
+                                        endPointX = wW * .09; endPointY = wH * .15; angle1 = 45; angle2 = 329;
                                         myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, 1500, 'linear',function()//third stop
                                         {
                                             $("#seaWaves")[0].pause();
