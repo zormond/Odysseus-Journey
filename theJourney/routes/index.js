@@ -134,15 +134,15 @@ var clearSituations = function(){
 
 
  var initializeSituations = function()
- {for(var i = 0; i < 3; i++){
+ {for(var i = 0; i < situations.length; i++){
     var newSituation = new situation(situations[i]);
     newSituation.save(function(err,result){
       console.log("this is the result from saving: " + result);
     });
   }
 }
-//clearSituations();
-//initializeSituations();
+clearSituations();
+initializeSituations();
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.sendFile('theJourney.html', { root : 'public' });
