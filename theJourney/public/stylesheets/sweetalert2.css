@@ -32,7 +32,7 @@ body.swal2-iosfix {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   border-radius: 5px;
   box-sizing: border-box;
-  text-align: center;
+  text-align: left;
   margin: auto;
   overflow-x: hidden;
   overflow-y: auto;
@@ -237,6 +237,7 @@ body.swal2-iosfix {
     min-width: 40%;
     max-width: 100%; }
   .swal2-modal .swal2-radio {
+    text-align: center;
     border: 0; }
     .swal2-modal .swal2-radio label:not(:first-child) {
       margin-left: 20px; }
