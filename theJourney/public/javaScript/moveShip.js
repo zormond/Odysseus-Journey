@@ -6,7 +6,7 @@ $(document).ready(function(){
     var angle2 = 0;
     var wH = $(window).height();
     var wW = $(window).width();
-    var validate = 
+    var validate =
         function (result) {
             return new Promise(function (resolve, reject) {
                 if (result) {
@@ -53,7 +53,7 @@ $(document).ready(function(){
         'option6-1': "Option 6-1",
         'option6-2': "Option 6-2",
         'option6-3': "Option 6-3"
-    };; 
+    };;
     var options7 = {
         'option7-1': "Option 7-1",
         'option7-2': "Option 7-2",
@@ -77,22 +77,22 @@ $(document).ready(function(){
 
     var createParam = function(X, Y, a1,a2){
         bezier_params = {
-            start: { 
-                x: $("#ship").position().left, 
-                y: $("#ship").position().top, 
+            start: {
+                x: $("#ship").position().left,
+                y: $("#ship").position().top,
                 angle: a1
-            },  
-            end: { 
+            },
+            end: {
                 x: X,
-                y: Y, 
+                y: Y,
                 angle: a2,
                 length: 1
                 }
-        } 
+        }
         return bezier_params;
     }
 
-    
+
 swal({
         title:"Welcome to Odysseus' Journey!",
         text: "These are the directions",
@@ -111,70 +111,78 @@ swal({
             myShip.animate({path : new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, 1500,'linear', function()
             {
                 endPointX = wW * .10; endPointY =  wH * .40; angle1 = 0; angle2 = 0;
-                myShip.animate({path : new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, 1500, 'linear', function(){//first stop
-                    $("#seaWaves")[0].pause();
-                    swal(getSwalStop("The Lotus Eaters",options1)).then(function(result){
-                        swal(onwardSwal(result)).then(function(){
-                                endPointX = wW * .15; endPointY = wH * .60; angle1 = 10; angle2 = 17;
-                                myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, 1500, 'linear', function()//second stop
-                                {
-                                    $("#seaWaves")[0].pause();  
-                                    swal(getSwalStop("The Cyclops",options2)).then(function(result){
-                                        swal(onwardSwal(result)).then(function(){
-                                        endPointX = wW * .11; endPointY = wH * .15; angle1 = 45; angle2 = 329;
-                                        myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, 1500, 'linear',function()//third stop
-                                        {
-                                            $("#seaWaves")[0].pause();
-                                            swal(getSwalStop("The Lyc",options3)).then(function(result){
-                                                swal(onwardSwal(result)).then(function(){
-                                                    endPointX = wW * .16; endPointY = wH * .10; angle1 = 343; angle2 = 30;
-                                                    myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, 1500, 'linear',function()//fourth stop
-                                                    {
-                                                        $("#seaWaves")[0].pause();  
-                                                        swal(getSwalStop("Hades",options4)).then(function(result){
-                                                            swal(onwardSwal(result)).then(function(){
-                                                                endPointX = wW * .25; endPointY = wH * .35; angle1 = 33; angle2 = 315;
-                                                                myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, 1500, 'linear',function()//fifth stop
-                                                                {
-                                                                    $("#seaWaves")[0].pause();
-                                                                    swal(getSwalStop("The Sirens",options5)).then(function(result){
-                                                                        swal(onwardSwal(result)).then(function(){
-                                                                            endPointX = wW * .37; endPointY = wH * .63; angle1 = 326.565; angle2 = 47.452;
-                                                                            myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, 1500, 'linear',function()//sixth stop
-                                                                            {
-                        
-                                                                                endPointX = wW * .45; endPointY = wH * .34; angle1 =44; angle2 = 317;
-                                                                                myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, 1500, 'linear',function()//final stop
-                                                                                {
-                                                                                    $("#seaWaves")[0].pause();
-                                                                                    swal(getSwalStop("Calypso",options6)).then(function(result){
-                                                                                        swal(onwardSwal(result)).then(function()
-                                                                                        {
-                                                                                            endPointX = wW * .55; endPointY = wH * .50; angle1 =44; angle2 = 317; 
-                                                                                            myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, 1500, 'linear',function(){
-                                                                                                
-                                                                                            });
-                                                                                        });
-                                                                                    });
-                                                                                });
-                                                                            });                                                                                                                      
-                                                                        }); 
-                                                                    });
-                                                                });                                                        
-                                                            });
-                                                        })
-                                                    });                                                   
-                                                });
-                                            });  
-                                        });  
-                                    });
-                                });
-                            });
-                        });
-                    });
-                });
+                myShip.animate({path : new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, 1500, 'linear', firstStop);
 
             });
         });
-    });   
+    });
+
+    var firstStop = function() {
+        $("#seaWaves")[0].pause();
+        swal(getSwalStop("The Lotus Eaters",options1)).then(function(result){
+            swal(onwardSwal(result)).then(function(){
+                endPointX = wW * .15; endPointY = wH * .60; angle1 = 10; angle2 = 17;
+                myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, 1500, 'linear', secondStop);
+            });
+        });
+    }
+
+    var secondStop = function() {
+        $("#seaWaves")[0].pause();
+        swal(getSwalStop("The Cyclops",options2)).then(function(result){
+            swal(onwardSwal(result)).then(function(){
+                endPointX = wW * .11; endPointY = wH * .15; angle1 = 45; angle2 = 329;
+                myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, 1500, 'linear',thirdStop);
+            });
+        });
+    }
+
+    var thirdStop = function() {
+        $("#seaWaves")[0].pause();
+        swal(getSwalStop("The Lyc",options3)).then(function(result){
+            swal(onwardSwal(result)).then(function(){
+                endPointX = wW * .16; endPointY = wH * .10; angle1 = 343; angle2 = 30;
+                myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, 1500, 'linear',fourthStop);
+            });
+        });
+    }
+
+    var fourthStop = function() {
+        $("#seaWaves")[0].pause();
+        swal(getSwalStop("Hades",options4)).then(function(result){
+            swal(onwardSwal(result)).then(function(){
+                endPointX = wW * .25; endPointY = wH * .35; angle1 = 33; angle2 = 315;
+                myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, 1500, 'linear',fifthStop);
+            });
+        })
+    }
+
+    var fifthStop = function() {
+        $("#seaWaves")[0].pause();
+        swal(getSwalStop("The Sirens",options5)).then(function(result){
+            swal(onwardSwal(result)).then(function(){
+                endPointX = wW * .37; endPointY = wH * .63; angle1 = 326.565; angle2 = 47.452;
+                myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, 1500, 'linear',sixthStop);
+            });
+        });
+    }
+
+    var sixthStop = function() {
+        endPointX = wW * .45; endPointY = wH * .34; angle1 =44; angle2 = 317;
+        myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, 1500, 'linear',finalStop);
+    }
+
+    var finalStop = function() {
+        $("#seaWaves")[0].pause();
+        swal(getSwalStop("Calypso",options6)).then(function(result){
+            swal(onwardSwal(result)).then(function()
+            {
+                endPointX = wW * .55; endPointY = wH * .50; angle1 =44; angle2 = 317;
+                myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, 1500, 'linear',function(){
+
+                });
+            });
+        });
+    }
+
 });
