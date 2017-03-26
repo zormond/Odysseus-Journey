@@ -5,6 +5,7 @@ var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/OdysseusDB');
 
 var questions = [{
+    _id: 0,
     title: "The Lotus Eaters",
     question: "How does Odysseus handle the men that eat the Lotus?",
     answers:[{
@@ -18,6 +19,7 @@ var questions = [{
       answerScore: "0"
     }]
   },{
+    _id: 1,
     title: "Polyphemus",
     question: "What does Odysseus tell Polyphemus his name is after escaping?",
     answers:[{
@@ -31,6 +33,7 @@ var questions = [{
       answerScore: "0"
     }]
   },{
+    _id: 2,
     title: "Laistrygones",
     question: "What happens to Odyseus' three men that meet the king?",
     answers:[{
@@ -44,6 +47,7 @@ var questions = [{
       answerScore: "0"
     }]
   },{
+    _id: 3,
     title: "Hades",
     question: "Who does Odysseus go to speak to in the underworld?",
     answers:[{
@@ -56,7 +60,8 @@ var questions = [{
       answerText: "Tiresias",
       answerScore: "5"
     }]
-  },{//This one has two answers.
+  },{
+    _id: 4,
     title: "The Sirens",
     question: "How does Odysseus and his crew successfully pass the Sirens?",
     answers:[{
@@ -70,6 +75,7 @@ var questions = [{
       answerScore: "0"
     }]
   },{
+    _id: 5,
     title: "Calypso",
     question: "How does Odysseus get off Calypso's island?",
     answers:[{
@@ -83,21 +89,23 @@ var questions = [{
       answerScore: "0"
     }]
   },{
+    _id: 6,
     title: "Ithica",
     question: "How does Eurycleia recognize Odysseus even though he is in disguise?",
     answers:[{
       answerText: "The scar on his foot.",
-      answerScore: "TODO"
+      answerScore: "5"
     },{
       answerText: "His voice.",
-      answerScore: "TODO"
+      answerScore: "0"
     },{
       answerText: "His ability to shoot an arrow through 12 axe heads with Odysseus' bow.",
-      answerScore: "TODO"
+      answerScore: "0"
     }]
   }];
 
 var questionSchema = mongoose.Schema({
+  _id: Number,
   question: String,
   answers: [{
     answerText: String,
@@ -134,8 +142,8 @@ var setQuestions = function(){
   }
 };
 
-//removeQuestions();
-//setQuestions();
+removeQuestions();
+setQuestions();
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.sendFile('theJourney.html', { root : 'public' });
