@@ -11,13 +11,13 @@ var situations = [{
                "these people. Upon return, you find that these men have no wanting to go home anymore. What do you do? ",
     answers:[{
       answerText: "Force the men on the ship, no matter how much they cry.",
-      answerScore: "1" //Odyssian
+      answerScore: "Odyssian" //Odyssian
     },{
       answerText: "Kill these men for their mutiny and abandonment.",
-      answerScore: "0" //Brutal
+      answerScore: "Brutal" //Brutal
     },{
       answerText: "Leave the men on the island to live onward in ignorant bliss.",
-      answerScore: "-1" //Different
+      answerScore: "Different" //Different
     }]
   },{
     _id: 1,
@@ -30,10 +30,10 @@ var situations = [{
       answerScore: "2" //Different
     },{
       answerText: "Somehow sweet talk Polyphemus into accepting a sacrifice of your crew in the cave in return for only your escape.",
-      answerScore: "0" //Brutal
+      answerScore: "Brutal" //Brutal
     },{
       answerText: "Fashion a giant shiv and stab him in the eye which leads Polyphemus to open the door, leading to your escape.",
-      answerScore: "1" //Odyssian
+      answerScore: "Odyssian" //Odyssian
     }]
   },{
     _id: 2,
@@ -43,13 +43,13 @@ var situations = [{
                "To their horror the leader takes one of them and makes dinner of him. As you try to escape with your men...",
     answers:[{
       answerText: "You throw some of your own men down to slow the oncoming Laistrygonians, easily making back to your own ship in time.",
-      answerScore: "0" //Brutal
+      answerScore: "Brutal" //Brutal
     },{
       answerText: "You cut your own ship free and flee as fast as you can, only worrying about the men on your ship.",
-      answerScore: "1" //Odyssian
+      answerScore: "Odyssian" //Odyssian
     },{
       answerText: "You run towards the Laistrygones as a distraction to save your men. You still luckily make it back to your ship in time.",
-      answerScore: "-1" //Different
+      answerScore: "Different" //Different
     }]
   },{
     _id: 3,
@@ -59,13 +59,13 @@ var situations = [{
                "gave you to reach the underworld. After performing the rituals, who do you choose to speak to? ",
     answers:[{
       answerText: "Elpenor, Tiresias, Agamemnon, Achilles, Ajax Odyssian",
-      answerScore: "1" //Odyssian
+      answerScore: "Odyssian" //Odyssian
     },{
       answerText: "Only talk to Tiresias to receive the prophecy and leave.",
-      answerScore: "0" //Brutal
+      answerScore: "Brutal" //Brutal
     },{
       answerText: "Speak with everyone that approaches.",
-      answerScore: "-1" //Different
+      answerScore: "Different" //Different
     }]
   },{//This one has two answers.
     _id: 4,
@@ -74,13 +74,13 @@ var situations = [{
                " your men tie you up while you listen. Which do you choose?",
     answers:[{
       answerText: "Stuff everyone's ears with wax, including your own",
-      answerScore: "-1"//Different
+      answerScore: "Different"//Different
     },{
       answerText: "Stuff everyone's ears but your own.",
-      answerScore: "1" //Odyssian
+      answerScore: "Odyssian" //Odyssian
     },{
       answerText: "Lead an onslaught against the Sirens, losing half of your men.",
-      answerScore: "0"//Brutal
+      answerScore: "Brutal"//Brutal
     }]
   },{
     _id: 5,
@@ -89,13 +89,13 @@ var situations = [{
                "storm in which only you survive and wash up on Calypso's island. Calypso is quite into you... what do you do?",
     answers:[{
       answerText: "Live on your own, remembering that you have a wife in Ithica, and wait to see if the gods will help you.",
-      answerScore: "-1"//Different
+      answerScore: "Different"//Different
     },{
       answerText: "Resist but give in and enjoy your stay until the gods 'save' you.",
-      answerScore: "1" //Odyssian
+      answerScore: "Odyssian" //Odyssian
     },{
       answerText: "Welcome Calypso into your life and enjoy your stay until the gods 'save' you.",
-      answerScore: "0" //Brutal
+      answerScore: "Brutal" //Brutal
     }]
   },{
     _id: 6,
@@ -104,13 +104,13 @@ var situations = [{
                " all this time. After passing Penolope's test, what do you decide to do with the suitors?",
     answers:[{
       answerText: "Slaughter them all, showing no mercy.",
-      answerScore: "1" //Odyssian
+      answerScore: "Odyssian" //Odyssian
     },{
       answerText: "Let the suitors live, but force them from your home.",
-      answerScore: "-1" //different
+      answerScore: "Different" //different
     },{
       answerText: "Banish the suitors from Ithaca, making sure that they never have any influence ever again.",
-      answerScore: "-1" //different
+      answerScore: "Different" //different
     }]
   }];
 

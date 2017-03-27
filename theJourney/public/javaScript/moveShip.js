@@ -16,7 +16,8 @@ function onDataRecieved(response) {
         option2: "Option 2",
         option3: "Option 3"
     };
-    var sailTime = 3000;
+    var sailTime = 300;
+    var myAnswers = [];
     var myShip = $("#ship");
     var endPointX = 0;
     var endPointY = 0;
@@ -36,23 +37,22 @@ function onDataRecieved(response) {
             })
         };
 
-    var currScore = 0;
-
     var onwardSwal = function(result){
         var display;
         if (result === "option1"){
           display = questions[stopCount].answers[0].answerText;
-          //currScore += parseInt(questions[stopCount].answers[0].answerScore);
+          myAnswers.push(questions[stopCount].answers[0].answerScore);
         } 
-        else if(result ==="option2")
+        else if(result === "option2")
         {
           display = questions[stopCount].answers[1].answerText;
-          //currScore += parseInt(questions[stopCount].answers[1].answerScore);
+          myAnswers.push(questions[stopCount].answers[1].answerScore);;
         }
         else{
           display = questions[stopCount].answers[2].answerText;
-          //currScore += parseInt(questions[stopCount].answers[2].answerScore);
+          myAnswers.push(questions[stopCount].answers[2].answerScore);
         }
+        console.log(myAnswers);
         return {
             title:'Onward!',
             html: 'You selected: ' + display,
@@ -60,11 +60,35 @@ function onDataRecieved(response) {
         };
     }
 
+    var calculateResult = function(){
+        var odyssian = 0; var different = 0; var brutal = 0;
+        for(var i = 0; i < myAnswers.length; i++)
+        {
+            var answer = myAnswers[i]; 
+            if(answer === "Odyssian") {odyssian++;}
+            else if(answer ==="Brutal") {brutal++;}
+            else {different++;}
+        }
+        var max = Math.max(odyssian,Math.max(brutal,different));
+        if(max === odyssian)
+        {
+            return "An Odyssian type of leader. Take it or leave it."
+        }
+        else if(different === max)
+        {
+            return "A one of a kind leader. No one is like you."
+        }
+        else{
+            return "An awfully brutal leader. I hope that you don't lead me."
+        }
+    }
+
     var finalswal = function(result)
     {
+        var totalResult = calculateResult();
         return {
-            title:'Results: ',
-            //html: "You scored " + currScore + "/35",
+            title: "After taking into consideration you responses... it has been determined that you are: ",
+            html: "<span>" + totalResult + "</span>",
             background: '#332106 url(../oldPaper.jpg)',
         };
     }
@@ -146,7 +170,6 @@ swal({
         swal(getSwalStop("The Lotus Eaters")).then(function(result){
             swal(onwardSwal(result)).then(function(){
                 stopCount++;
-                console.log("Score after first stop: " + currScore);
                 endPointX = wW * .13; endPointY = wH * .62; angle1 = 10; angle2 = 17;
                 myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, sailTime, 'linear', secondStop);
             });
@@ -157,7 +180,6 @@ swal({
         swal(getSwalStop("The Cyclops")).then(function(result){
             swal(onwardSwal(result)).then(function(){
                 stopCount++;
-                  console.log("Score after second stop: " + currScore);
                 endPointX = wW * .09; endPointY = wH * .15; angle1 = 45; angle2 = 329;
                 myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, sailTime, 'linear',thirdStop);
             });
@@ -165,11 +187,10 @@ swal({
     }
 
     var thirdStop = function() {
-        swal(getSwalStop("The Lyc")).then(function(result){
+        swal(getSwalStop("The Laistrygonians")).then(function(result){
            
             swal(onwardSwal(result)).then(function(){
                 stopCount++;
-                console.log("Score after third stop: " + currScore);
                 endPointX = wW * .16; endPointY = wH * .10; angle1 = 343; angle2 = 30;
                 myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, sailTime, 'linear',fourthStop);
             });
@@ -181,7 +202,6 @@ swal({
         
             swal(onwardSwal(result)).then(function(){
                 stopCount++;
-                console.log("Score after fourth stop: " + currScore);
                 endPointX = wW * .25; endPointY = wH * .35; angle1 = 33; angle2 = 315;
                 myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, sailTime, 'linear',fifthStop);
             });
@@ -193,7 +213,6 @@ swal({
       
             swal(onwardSwal(result)).then(function(){
                 stopCount++;
-                console.log("Score after fifth stop: " + currScore);
                 endPointX = wW * .37; endPointY = wH * .63; angle1 = 326.565; angle2 = 47.452;
                 myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, sailTime, 'linear',sixthStop);
             });
@@ -210,14 +229,12 @@ swal({
             swal(onwardSwal(result)).then(function()
             {
                 stopCount++;
-                console.log("Score after sixth stop: " + currScore);
                 endPointX = wW * .55; endPointY = wH * .50; angle1 =44; angle2 = 317;
                 myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, sailTime, 'linear',function(){
                     swal(getSwalStop("Ithaca")).then(function(result)
                     {
                         swal(onwardSwal(result)).then(function()
                         {
-                            console.log("Score after seventh stop: " + currScore);
                             swal(finalswal());
                         });
                     });
