@@ -7,13 +7,13 @@ mongoose.connect('mongodb://localhost/OdysseusDB');
 var situations = [{
     _id: 0,
     title: "The Lotus Eaters",
-    situation: "After a terrible storm created by Zeus, you make your way to the Land of the Lotus Eaters. You send 3 men to go greet" +
-               "these foreign people. Upon return, you find that these men have no wanting to go home anymore. What do you do? ",
+    situation: "After a terrible storm created by Zeus, you make your way to the Land of the Lotus Eaters. You send 3 men to go greet " +
+               "these people. Upon return, you find that these men have no wanting to go home anymore. What do you do? ",
     answers:[{
       answerText: "Force the men on the ship, no matter how much they cry.",
       answerScore: "1" //Odyssian
     },{
-      answerText: "Kill these men for their mutiny and abandonement.",
+      answerText: "Kill these men for their mutiny and abandonment.",
       answerScore: "0" //Brutal
     },{
       answerText: "Leave the men on the island to live onward in ignorant bliss.",
@@ -23,13 +23,13 @@ var situations = [{
     _id: 1,
     title: "Polyphemus",
     situation: "After escaping the spellbinding effect of the Lotus Eaters you landed near the island of the Cyclopes. You decided" +
-               "to go exploring where the Cyclopes lives and end up being captured by Polyphemus. Within 12 hours of meeting Polyphemus he eats" +
-               "four of your men. The need to escape is dire. How do you do so? ",
+               " to go exploring where the Cyclopes live and end up being captured by Polyphemus. Within 12 hours of meeting Polyphemus he eats" +
+               " four of your men. The need to escape is dire. How do you do so? ",
     answers:[{
       answerText: "Engage in hand to hand combat with Polyphemus. The other giants here the conflict, opening the giant door, and allowing you to escape.",
       answerScore: "2" //Different
     },{
-      answerText: "Somehow sweet talk Polyphemus into sacrificing all of your crew in the cave to Polyphemus in return for only your escape.",
+      answerText: "Somehow sweet talk Polyphemus into accepting a sacrifice of your crew in the cave in return for only your escape.",
       answerScore: "0" //Brutal
     },{
       answerText: "Fashion a giant shiv and stab him in the eye which leads Polyphemus to open the door, leading to your escape.",
@@ -45,7 +45,7 @@ var situations = [{
       answerText: "You throw some of your own men down to slow the oncoming Laistrygonians, easily making back to your own ship in time.",
       answerScore: "0" //Brutal
     },{
-      answerText: "You Cut your own ship free and flee as fast as you can, only worrying about the men on your ship.",
+      answerText: "You cut your own ship free and flee as fast as you can, only worrying about the men on your ship.",
       answerScore: "1" //Odyssian
     },{
       answerText: "You run towards the Laistrygones as a distraction to save your men. You still luckily make it back to your ship in time.",
@@ -71,7 +71,7 @@ var situations = [{
     _id: 4,
     title: "The Sirens",
     situation: "On your way back to Ithaca you must pass the deadly sirens. You have the option to stuff everyone's ears with wax including your own, or you can have" + 
-               "you men tie you up while you listen. Which do you choose?",
+               " your men tie you up while you listen. Which do you choose?",
     answers:[{
       answerText: "Stuff everyone's ears with wax, including your own",
       answerScore: "-1"//Different
@@ -94,14 +94,14 @@ var situations = [{
       answerText: "Resist but give in and enjoy your stay until the gods 'save' you.",
       answerScore: "1" //Odyssian
     },{
-      answerText: "Welcome Calypso into your life and enjoy your stay until the God's 'save' you.",
+      answerText: "Welcome Calypso into your life and enjoy your stay until the gods 'save' you.",
       answerScore: "0" //Brutal
     }]
   },{
     _id: 6,
     title: "Ithica",
-    situation: "You have returned to Ithaca after the God's decided to convince Calypso to let you return home. You disguised yourself to see who has been loyal to you"+
-               "all this time. After passing Penolope's test, what do you decide to do with the suitors?",
+    situation: "You have returned to Ithaca after the gods decided to convince Calypso to let you return home. You disguised yourself to see who has been loyal to you"+
+               " all this time. After passing Penolope's test, what do you decide to do with the suitors?",
     answers:[{
       answerText: "Slaughter them all, showing no mercy.",
       answerScore: "1" //Odyssian
@@ -152,8 +152,8 @@ var clearSituations = function(){
     });
   }
 }
-//clearSituations();
-//initializeSituations();
+clearSituations();
+initializeSituations();
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.sendFile('theJourney.html', { root : 'public' });

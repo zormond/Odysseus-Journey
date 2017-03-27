@@ -19,10 +19,6 @@ body{
   z-index: -1;
 }
 
-#situation{
-  text-align: left !important;
-}
-
 #ship{
   position:absolute;
   height: 5vh;
