@@ -136,7 +136,7 @@ swal({
         endPointX = wW * .25; endPointY =  wH * .65; angle1 = 0; angle2 = 0;
         myShip.animate({path : new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, sailTime,'linear', function()
         {
-            endPointX = wW * .10; endPointY =  wH * .40; angle1 = 0; angle2 = 0;
+            endPointX = wW * .06; endPointY =  wH * .40; angle1 = 0; angle2 = 0;
             myShip.animate({path : new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, sailTime, 'linear', firstStop);
 
         });
@@ -147,7 +147,7 @@ swal({
             swal(onwardSwal(result)).then(function(){
                 stopCount++;
                 console.log("Score after first stop: " + currScore);
-                endPointX = wW * .15; endPointY = wH * .60; angle1 = 10; angle2 = 17;
+                endPointX = wW * .13; endPointY = wH * .62; angle1 = 10; angle2 = 17;
                 myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, sailTime, 'linear', secondStop);
             });
         });
@@ -158,7 +158,7 @@ swal({
             swal(onwardSwal(result)).then(function(){
                 stopCount++;
                   console.log("Score after second stop: " + currScore);
-                endPointX = wW * .11; endPointY = wH * .15; angle1 = 45; angle2 = 329;
+                endPointX = wW * .09; endPointY = wH * .15; angle1 = 45; angle2 = 329;
                 myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, sailTime, 'linear',thirdStop);
             });
         });
