@@ -1,8 +1,10 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var router = express.Router();
+var Filter = require("bad-words"), filter = new Filter();
 
 mongoose.connect('mongodb://localhost/OdysseusDB');
+
 
 var situations = [{
     _id: 0,
@@ -125,6 +127,16 @@ var situationSchema = mongoose.Schema({
   }]
 });
 
+var resultSchema = mongoose.Schema({
+  user: String,
+  odyssian: Number,
+  different: Number,
+  brutal: Number,
+  result: String,
+});
+
+var result = mongoose.model('results', resultSchema);
+
 var situation = mongoose.model('situations', situationSchema);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console,'connection error: '));
@@ -143,6 +155,15 @@ var clearSituations = function(){
   });
 };
 
+var clearResults = function(){
+  result.remove({},function(err){
+    if(err) {return console.error(err);}
+    else{
+
+    }
+  });
+}
+
 
  var initializeSituations = function()
  {for(var i = 0; i < situations.length; i++){
@@ -159,8 +180,25 @@ router.get('/', function(req, res, next) {
   res.sendFile('theJourney.html', { root : 'public' });
 });
 
-router.post('/situations', function(req,res,next){
+router.post('/result', function(req,res,next){
+  var cleanUser = filter.clean(req.body.user);
+  var newResult = req.body;
+  newResult.user = cleanUser;
+  var resultToSave = new result(newResult);
+  resultToSave.save(function(err,result){
+    console.log(result);
+  });
+  res.json({result:"finished"});
+});
 
+router.get('/results',function(req,res,next){
+  result.find({}).sort({"user":'1'}).exec(function(err,Results){
+    if(err) return console.error(err);
+    else{
+      console.log(Results);
+      res.json(Results);
+    }
+  })
 });
 
 router.get('/situations', function(req,res,next){

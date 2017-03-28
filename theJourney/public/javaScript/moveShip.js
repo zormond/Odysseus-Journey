@@ -59,9 +59,9 @@ function onDataRecieved(response) {
             background: '#332106 url(../oldPaper.jpg)',
         };
     }
-
+    var odyssian = 0; var different = 0; var brutal = 0;
     var calculateResult = function(){
-        var odyssian = 0; var different = 0; var brutal = 0;
+
         for(var i = 0; i < myAnswers.length; i++)
         {
             var answer = myAnswers[i]; 
@@ -72,22 +72,22 @@ function onDataRecieved(response) {
         var max = Math.max(odyssian,Math.max(brutal,different));
         if(max === odyssian)
         {
-            return "An Odyssian type of leader. Take it or leave it."
+            return "An Odyssian type of leader! Take it or leave it."
         }
         else if(different === max)
         {
-            return "A one of a kind leader. No one is like you."
+            return "A one of a kind leader! No one is like you."
         }
         else{
-            return "An awfully brutal leader. I hope that you don't lead me."
+            return "An awfully brutal leader! I hope that you don't lead me."
         }
     }
-
+    var totalResult; 
     var finalswal = function(result)
     {
-        var totalResult = calculateResult();
+        totalResult = calculateResult();
         return {
-            title: "After taking into consideration you responses... it has been determined that you are: ",
+            title: "You are...",
             html: "<span>" + totalResult + "</span>",
             background: '#332106 url(../oldPaper.jpg)',
         };
@@ -134,6 +134,15 @@ function onDataRecieved(response) {
         return bezier_params;
     }
 
+    var displayResultsSwal =function(results){
+        var myResults = JSON.parse(results);
+        for(var i = 0; i < results.length; i++){
+
+        }
+        swal({
+            title: "Here are everyone's results: "
+        });
+    }
 
 
     var createQuestion = function(curQ){
@@ -143,7 +152,7 @@ function onDataRecieved(response) {
 
 swal({
         title:"Welcome to Odysseus' Journey!",
-        text: "The Trojan War has just ended, now you need to get home.",
+        text: "The point of this is for you to take Odysseus position to see what kind of leader you are compared to Odysseus.",
         background: '#332106 url(../oldPaper.jpg)',
         width: '75%',
         padding: 75,
@@ -224,6 +233,53 @@ swal({
         myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, sailTime, 'linear',finalStop);
     }
 
+    var recordResult = function(){
+        swal({
+            title: "Record results",
+            input: 'text',
+            confirmButtonText: 'Submit',
+            showLoaderOnConfirm: true,
+            inputPlaceHolder: 'Enter your name!',
+        }).then(function(result){
+            postNameAndResult(result);
+        });
+    }
+
+    var postNameAndResult = function(result){
+        var resultObject = {
+            user: result,
+            odyssian: odyssian,
+            different: different,
+            brutal: brutal,
+            result: totalResult
+        }
+        $.ajax({
+            type: 'POST',
+            url: '/result',
+            data: resultObject,
+            success: function(data){
+                console.log(data);
+                swal({
+                    type: 'success',
+                    title: "Thank you " + result + "!" 
+                }).then(getAllResults());
+            }
+        }); 
+    }
+
+    var getAllResults = function(){
+        $.ajax({
+            type: "GET",
+            dataType: 'application/json',
+            url: '/results',
+            success: function(data){
+                console.log(JSON.parse(data));
+                displayResultsSwal(data);
+            }
+        });
+
+    }
+
     var finalStop = function() {
         swal(getSwalStop("Calypso")).then(function(result){
             swal(onwardSwal(result)).then(function()
@@ -235,7 +291,7 @@ swal({
                     {
                         swal(onwardSwal(result)).then(function()
                         {
-                            swal(finalswal());
+                            swal(finalswal()).then(recordResult());
                         });
                     });
                 });
