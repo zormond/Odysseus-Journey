@@ -5,6 +5,7 @@ var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/OdysseusDB');
 
 var questions = [{
+
     _id: 0,
     title: "The Lotus Eaters",
     question: "How does Odysseus handle the men that eat the Lotus?",
@@ -104,6 +105,10 @@ var questions = [{
     }]
   }];
 
+
+
+
+
 var questionSchema = mongoose.Schema({
   _id: Number,
   question: String,
@@ -113,7 +118,13 @@ var questionSchema = mongoose.Schema({
   }],
 });
 
+var quizResultSchema = mongoose.Schema({
+  user: String,
+  score: Number,
+});
+
 var Question = mongoose.model('Question', questionSchema);
+var quizResult = mongoose.model('quizResult', quizResultSchema);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console,'connection error: '));
 db.once('open', function(){
@@ -149,9 +160,28 @@ router.get('/', function(req, res, next) {
   res.sendFile('theJourney.html', { root : 'public' });
 });
 
-router.post('/answer', function(req,res,next){
-
+router.post('/quizResult', function(req,res,next){
+  console.log("in the quizResultsPost route");
+  var newQuizResult = new quizResult(req.body);
+  newQuizResult.save(function(err,post){
+    if(err) return console.error(err);
+    else{
+      res.json({status: 'success'});
+    }
+  });
 });
+
+router.get('/quizResults',function(req,res,next){
+  quizResult.find({}).sort({'score': -1}).limit(10).exec(function(err,scoreList){
+    if(err) return console.error(err);
+    else{
+      console.log(scoreList);
+      res.json(scoreList);
+    }
+  });
+});
+
+
 
 router.get('/questions', function(req,res,next)
 {

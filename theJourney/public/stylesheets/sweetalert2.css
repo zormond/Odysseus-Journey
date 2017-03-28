@@ -43,7 +43,7 @@ body.swal2-iosfix {
   .swal2-modal.swal2-loading {
     overflow-y: hidden; }
   .swal2-modal .swal2-title {
-    color: white;
+    color: black;
     font-size: 30px;
     text-align: center;
     font-weight: 600;
@@ -113,7 +113,7 @@ body.swal2-iosfix {
     top: 5px;
     right: 13px;
     cursor: pointer;
-    color: white;
+    color: black;
     -webkit-transition: color .1s ease;
     transition: color .1s ease; }
     .swal2-modal .swal2-close:hover {
@@ -134,7 +134,7 @@ body.swal2-iosfix {
     margin: 0;
     padding: 0;
     line-height: normal;
-    color: white;
+    color: black;
     word-wrap: break-word; }
   .swal2-modal .swal2-input,
   .swal2-modal .swal2-file,
@@ -231,7 +231,7 @@ body.swal2-iosfix {
     height: 108px;
     padding: 12px; }
   .swal2-modal .swal2-select {
-    color: white;
+    color: black;
     font-size: inherit;
     padding: 5px 10px;
     min-width: 40%;
@@ -242,11 +242,11 @@ body.swal2-iosfix {
       margin-left: 20px; }
     .swal2-modal .swal2-radio input,
     .swal2-modal .swal2-radio span {
-      vertical-align: middle; color: white; }
+      vertical-align: middle; color: black; }
     .swal2-modal .swal2-radio input {
       margin: 0 3px 0 0; }
   .swal2-modal .swal2-checkbox {
-    color: white; }
+    color: black; }
     .swal2-modal .swal2-checkbox input,
     .swal2-modal .swal2-checkbox span {
       vertical-align: middle; }

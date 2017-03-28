@@ -22,6 +22,7 @@ function onDataRecieved(response) {
     var angle1 = 0;
     var angle2 = 0;
     var stopCount = 0;
+    var shipSpeed = 150;
     var wH = $(window).height();
     var wW = $(window).width();
     var validate =
@@ -55,7 +56,7 @@ function onDataRecieved(response) {
         return {
             title:'Onward!',
             html: 'You selected ' + display,
-            background: '#332106 url(../oldPaper.jpg)',
+            background: '#332106 url(../images/oldPaper.jpg)',
         };
     }
 
@@ -64,7 +65,7 @@ function onDataRecieved(response) {
         return {
             title:'Results: ',
             html: "You scored " + currScore + "/35",
-            background: '#332106 url(../oldPaper.jpg)',
+            background: '#332106 url(../images/oldPaper.jpg)',
         };
     }
 
@@ -74,7 +75,7 @@ function onDataRecieved(response) {
             html: createQuestion(questions[stopCount]),
             input:"radio",
             inputOptions:options,
-            background: '#332106 url(../oldPaper.jpg)',
+            background: '#332106 url(../images/oldPaper.jpg)',
             width: '75%',
             padding: 75,
             inputValidator: validate,
@@ -100,6 +101,10 @@ function onDataRecieved(response) {
         return bezier_params;
     }
 
+    var postScore = function(result){
+
+    }
+
 
 
     var createQuestion = function(curQ){
@@ -109,7 +114,7 @@ function onDataRecieved(response) {
 swal({
         title:"Welcome to Odysseus' Journey!",
         text: "The Trojan War has just ended, now you need to get home.",
-        background: '#332106 url(../oldPaper.jpg)',
+        background: '#332106 url(../images/oldPaper.jpg)',
         width: '75%',
         padding: 75,
         allowOutsideClick: false,
@@ -124,10 +129,10 @@ swal({
 
     var startVoyage = function()  {
         endPointX = wW * .25; endPointY =  wH * .65; angle1 = 0; angle2 = 0;
-        myShip.animate({path : new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, 150,'linear', function()
+        myShip.animate({path : new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, shipSpeed,'linear', function()
         {
             endPointX = wW * .10; endPointY =  wH * .40; angle1 = 0; angle2 = 0;
-            myShip.animate({path : new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, 150, 'linear', firstStop);
+            myShip.animate({path : new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, shipSpeed, 'linear', firstStop);
 
         });
     }
@@ -139,7 +144,7 @@ swal({
                 stopCount++;
                 console.log("Score after first stop: " + currScore);
                 endPointX = wW * .15; endPointY = wH * .60; angle1 = 10; angle2 = 17;
-                myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, 1500, 'linear', secondStop);
+                myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, shipSpeed, 'linear', secondStop);
             });
         });
     }
@@ -151,7 +156,7 @@ swal({
                 stopCount++;
                   console.log("Score after second stop: " + currScore);
                 endPointX = wW * .11; endPointY = wH * .15; angle1 = 45; angle2 = 329;
-                myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, 1500, 'linear',thirdStop);
+                myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, shipSpeed, 'linear',thirdStop);
             });
         });
     }
@@ -164,7 +169,7 @@ swal({
                 stopCount++;
                 console.log("Score after third stop: " + currScore);
                 endPointX = wW * .16; endPointY = wH * .10; angle1 = 343; angle2 = 30;
-                myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, 1500, 'linear',fourthStop);
+                myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, shipSpeed, 'linear',fourthStop);
             });
         });
     }
@@ -177,7 +182,7 @@ swal({
                 stopCount++;
                 console.log("Score after fourth stop: " + currScore);
                 endPointX = wW * .25; endPointY = wH * .35; angle1 = 33; angle2 = 315;
-                myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, 1500, 'linear',fifthStop);
+                myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, shipSpeed, 'linear',fifthStop);
             });
         })
     }
@@ -190,14 +195,66 @@ swal({
                 stopCount++;
                 console.log("Score after fifth stop: " + currScore);
                 endPointX = wW * .37; endPointY = wH * .63; angle1 = 326.565; angle2 = 47.452;
-                myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, 1500, 'linear',sixthStop);
+                myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))},shipSpeed, 'linear',sixthStop);
             });
         });
     }
 
     var sixthStop = function() {
         endPointX = wW * .45; endPointY = wH * .34; angle1 =44; angle2 = 317;
-        myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, 1500, 'linear',finalStop);
+        myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, shipSpeed, 'linear',finalStop);
+    }
+
+    var recordResult = function(){
+        swal({
+            title: "Record results",
+            input: 'text',
+            confirmButtonText: 'Submit',
+            showLoaderOnConfirm: true,
+            inputPlaceHolder: 'Enter your name!',
+        }).then(function(result){
+            postNameAndResult(result);
+        });
+    }
+
+    var postNameAndResult = function(result){
+        var resultObject = {
+            user: result,
+            score: currScore,
+        }
+        $.ajax({
+            type: 'POST',
+            url: '/quizResult',
+            data: resultObject,
+            success: function(data){
+                console.log(data);
+                swal({
+                    type: 'success',
+                    title: "Thank you " + result + "!" 
+                }).then(getAllResults());
+            }
+        }); 
+    }
+
+    var getAllResults = function(){
+        $.getJSON("/quizResults",function(scoreList){
+            var totalHTML = "<ol id='scoreList'>";
+            for(var i = 0; i < scoreList.length; i++)
+            {
+                totalHTML +=  "<li class='scoreItem'>" + "<span>   " + scoreList[i].user + ": " + scoreList[i].score; + "</span></li>";
+            }
+            totalHTML +="</ol>";
+            console.log(totalHTML);
+            swal({
+                title: "Top 10 Scores: ",
+                html: totalHTML,
+                background: '#332106 url(../images/oldPaper.jpg)',
+                confirmButtonText: "Try Again!"
+            }).then(function(){
+                window.location.reload(false); 
+            });
+        });
+
     }
 
     var finalStop = function() {
@@ -214,7 +271,7 @@ swal({
                         swal(onwardSwal(result)).then(function()
                         {
                             console.log("Score after seventh stop: " + currScore);
-                            swal(finalswal());
+                            swal(finalswal()).then(recordResult());
                         });
                     });
                 });
