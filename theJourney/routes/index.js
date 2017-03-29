@@ -29,7 +29,7 @@ var situations = [{
                " four of your men. The need to escape is dire. How do you do so? ",
     answers:[{
       answerText: "Engage in hand to hand combat with Polyphemus. The other giants here the conflict, opening the giant door, and allowing you to escape.",
-      answerScore: "2" //Different
+      answerScore: "Different" //Different
     },{
       answerText: "Somehow sweet talk Polyphemus into accepting a sacrifice of your crew in the cave in return for only your escape.",
       answerScore: "Brutal" //Brutal
@@ -128,6 +128,7 @@ var situationSchema = mongoose.Schema({
 });
 
 var resultSchema = mongoose.Schema({
+  _id: Date,
   user: String,
   odyssian: Number,
   different: Number,
@@ -173,8 +174,9 @@ var clearResults = function(){
     });
   }
 }
-clearSituations();
-initializeSituations();
+//clearSituations();
+//initializeSituations();
+//clearResults();
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.sendFile('theJourney.html', { root : 'public' });
@@ -184,6 +186,7 @@ router.post('/result', function(req,res,next){
   var cleanUser = filter.clean(req.body.user);
   var newResult = req.body;
   newResult.user = cleanUser;
+  newResult._id = new Date();
   var resultToSave = new result(newResult);
   resultToSave.save(function(err,result){
     console.log(result);
@@ -192,7 +195,7 @@ router.post('/result', function(req,res,next){
 });
 
 router.get('/results',function(req,res,next){
-  result.find({}).sort({"user":'1'}).exec(function(err,Results){
+  result.find({}).sort({"_id":'-1'}).exec(function(err,Results){
     if(err) return console.error(err);
     else{
       console.log(Results);
