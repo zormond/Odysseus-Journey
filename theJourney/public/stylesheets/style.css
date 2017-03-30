@@ -42,3 +42,13 @@ body{
   font-size: 2.4vh;
 }
 
+#theStory{
+  text-align: left;
+  width:80%;
+}
+
+::-webkit-input-placeholder{
+  color:black !important;
+  opacity: .5;
+}
+

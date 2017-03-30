@@ -141,11 +141,12 @@ function onDataRecieved(response) {
 
     var finalswal = function(result)
     {
-        totalResult = calculateResult();
+        var totalMadLib ="<pre id='theStory'>" + totalResult + "</pre>"
         swal({
-            title: "You are...",
-            html: "",
+            title: "The Odyssey according to you: ",
+            html: totalMadLib,
             background: '#332106 url(../oldPaper.jpg)',
+            width: "auto",
         }).then(function(){
            
         });
