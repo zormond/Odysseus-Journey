@@ -1,7 +1,7 @@
 $(document).ready(function(){
     $("#music")[0].volume = .05;
     $.ajax({
-        url:"/situations",
+        url:"/madLibs",
         dataType:"application/json",
         success:onDataRecieved
     })
@@ -9,23 +9,16 @@ $(document).ready(function(){
 
 function onDataRecieved(response) {
     var boatSounds = $("#boatSound");
-    var questions = JSON.parse(response);
-    console.log(questions);
+    var madLibs = JSON.parse(response);
+    console.log(madLibs);
     var options = {
         option1: "Option 1",
         option2: "Option 2",
         option3: "Option 3"
     };
-    var sailTime = 300;
-    var myAnswers = [];
-    var myShip = $("#ship");
-    var endPointX = 0;
-    var endPointY = 0;
-    var angle1 = 0;
-    var angle2 = 0;
-    var stopCount = 0;
-    var wH = $(window).height();
-    var wW = $(window).width();
+    var sailTime = 300;     var myAnswers = [];     var myShip = $("#ship");    var endPointX = 0;           var endPointY = 0;
+    var angle1 = 0;         var angle2 = 0;         var stopCount = 0;          var wH = $(window).height(); var wW = $(window).width();
+    var odyssian = 0;       var different = 0;      var brutal = 0;             var totalResult = []; 
     var validate =
         function (result) {
             return new Promise(function (resolve, reject) {
@@ -38,71 +31,64 @@ function onDataRecieved(response) {
         };
 
     var onwardSwal = function(result){
-        var display;
-        if (result === "option1"){
-          display = questions[stopCount].answers[0].answerText;
-          myAnswers.push(questions[stopCount].answers[0].answerScore);
+        var display = JSON.stringify(result);
+        /*if (result === "option1"){
+          display = madLibs[stopCount].answers[0].answerText;
+          myAnswers.push(madLibs[stopCount].answers[0].answerScore);
         } 
         else if(result === "option2")
         {
-          display = questions[stopCount].answers[1].answerText;
-          myAnswers.push(questions[stopCount].answers[1].answerScore);;
+          display = madLibs[stopCount].answers[1].answerText;
+          myAnswers.push(madLibs[stopCount].answers[1].answerScore);;
         }
         else{
-          display = questions[stopCount].answers[2].answerText;
-          myAnswers.push(questions[stopCount].answers[2].answerScore);
-        }
-        console.log(myAnswers);
+          display = madLibs[stopCount].answers[2].answerText;
+          myAnswers.push(madLibs[stopCount].answers[2].answerScore);
+        }*/
         return {
             title:'Onward!',
-            html: 'You selected: ' + display,
+            html: 'Your answers were:  ' + display,
             background: '#332106 url(../oldPaper.jpg)',
         };
     }
-    var odyssian = 0; var different = 0; var brutal = 0;
-    var calculateResult = function(){
 
-        for(var i = 0; i < myAnswers.length; i++)
-        {
-            var answer = myAnswers[i]; 
-            if(answer === "Odyssian") {odyssian++;}
-            else if(answer ==="Brutal") {brutal++;}
-            else {different++;}
-        }
-        var max = Math.max(odyssian,Math.max(brutal,different));
-        if(max === odyssian)
-        {
-            return "An Odyssian type of leader! Take it or leave it."
-        }
-        else if(different === max)
-        {
-            return "A one of a kind leader! No one is like you."
-        }
-        else{
-            return "An awfully brutal leader! I hope that you don't lead me."
-        }
-    }
-
-
+    var resolveArray = [];
     var getSwalStop = function(name){
-        boatSounds.animate({volume: 0}, 500, function(){
+        boatSounds.animate({volume: 0}, 500, function(){ //Fade out the boat sounds.
             boatSounds[0].pause();
         });
 
         return{
             title:name,
-            html: createQuestion(questions[stopCount]),
-            input:"radio",
-            inputOptions:options,
+            html: createMadLibInput(madLibs[stopCount]),
             background: '#332106 url(../oldPaper.jpg)',
+            preConfirm: function () {//Dynamically create inputs to resolve.
+                return new Promise(function (resolve) {
+                for(var i = 0; i < madLibs[stopCount].answers.length; i++)
+                {
+                    var id = "#swal-input" + String(i+1);
+                    console.log(id);
+                    resolveArray.push($(id).val());
+                }
+                resolve(resolveArray);
+                resolveArray = [];
+                })
+            },
+            onOpen: function () {
+                $('#swal-input1').focus();
+            },
             width: '75%',
             padding: 75,
-            inputValidator: validate,
             allowOutsideClick: false,
-            allowEscapeKey: false
+            allowEscapeKey: false,
         }
     }
 
+    var addToTotalResult = function(answers){
+        var createMadLib = madLibs[stopCount].madLib;
+        return vsprintf(createMadLib, answers);
+    }
+    //Used for moving the boat
     var createParam = function(X, Y, a1,a2){
         boatSounds[0].play();
         boatSounds.animate({volume: .5}, 500,function(){
@@ -151,73 +137,35 @@ function onDataRecieved(response) {
     }
 
 
-    var createQuestion = function(curQ){
-        return "<span>"+ curQ.situation +"</span><br><br><span>Option 1: " +curQ.answers[0].answerText +
-               "</span><br><br><span>Option 2: " +curQ.answers[1].answerText + "</span><br><br><span>Option 3: "+curQ.answers[2].answerText+"</span>"
+    var createMadLibInput = function(currentMadLib){
+          var totalInputs = "";
+          console.log(currentMadLib);
+          console.log(currentMadLib.answers.length);
+          for(var i = 0; i < currentMadLib.answers.length; i++)
+          {
+            var id = 'swal-input' + String(i+1);  
+            totalInputs += '<input id="' +id + '" class="swal2-input" placeHolder=' + currentMadLib.answers[i].answerText + '>';
+            //resolveArray.push(id);
+          }
+          console.log(totalInputs);
+          return totalInputs;       
     }
 
-    var totalResult; 
+
     var finalswal = function(result)
     {
         totalResult = calculateResult();
         swal({
             title: "You are...",
-            html: "<span>" + totalResult + "</span>",
+            html: "",
             background: '#332106 url(../oldPaper.jpg)',
         }).then(function(){
-            recordResult()
+           
         });
     }
 
-    var recordResult = function(){
-        swal({
-            title: "Record results",
-            input: 'text',
-            confirmButtonText: 'Submit',
-            inputPlaceHolder: 'Enter your name!',
-            background: 'url(../oldPaper.jpg)',
-        }).then(function(result){
-            postNameAndResult(result);
-        });
-    }
 
-    var postNameAndResult = function(result){
-        var resultObject = {
-            user: result,
-            odyssian: odyssian,
-            different: different,
-            brutal: brutal,
-            result: totalResult
-        }
-        $.ajax({
-            type: 'POST',
-            url: '/result',
-            data: resultObject,
-            success: function(data){
-                console.log(data);
-                swal({
-                    type: 'success',
-                    title: "Thank you " + result + "!" 
-                }).then(function(){
-                    getAllResults()
-                });
-            }
-        }); 
-    }
-
-    var getAllResults = function(){
-        $.ajax({
-            type: "GET",
-            dataType: 'application/json',
-            url: '/results',
-            success: function(data){
-                displayResultsSwal(data);
-            }
-        });
-
-    }
-
-
+//Start
 swal({
         title:"Welcome to Odysseus' Journey!",
         text: "The point of this is for you to take Odysseus position to see what kind of leader you are compared to Odysseus.",
@@ -245,6 +193,7 @@ swal({
 
     var firstStop = function() {
         swal(getSwalStop("The Lotus Eaters")).then(function(result){
+            addToTotalResult(result);
             swal(onwardSwal(result)).then(function(){
                 stopCount++;
                 endPointX = wW * .13; endPointY = wH * .62; angle1 = 10; angle2 = 17;

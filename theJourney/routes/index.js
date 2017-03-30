@@ -6,25 +6,26 @@ var Filter = require("bad-words"), filter = new Filter();
 mongoose.connect('mongodb://localhost/OdysseusDB');
 
 
-var situations = [{
+var madLibs = [{
     _id: 0,
     title: "The Lotus Eaters",
-    situation: "After a terrible storm created by Zeus, you make your way to the Land of the Lotus Eaters. You send 3 men to go greet " +
-               "these people. Upon return, you find that these men have no wanting to go home anymore. What do you do? ",
+    madLib: "After a terrible storm created by %s, you make your way to the Land of the Lotus Eaters. You send %s men to go greet " +
+               "these %s people. Upon return, you find that these %s have no wanting to go home anymore. You %s them onto the ship and leave.",
     answers:[{
-      answerText: "Force the men on the ship, no matter how much they cry.",
-      answerScore: "Odyssian" //Odyssian
+      answerText: "Person",
     },{
-      answerText: "Kill these men for their mutiny and abandonment.",
-      answerScore: "Brutal" //Brutal
+      answerText: "Number",
     },{
-      answerText: "Leave the men on the island to live onward in ignorant bliss.",
-      answerScore: "Different" //Different
+      answerText: "Adjective",
+    },{
+      answerText: "Noun"
+    },{
+      answerText: "Verb"
     }]
-  },{
+}/*{
     _id: 1,
     title: "Polyphemus",
-    situation: "After escaping the spellbinding effect of the Lotus Eaters you landed near the island of the Cyclopes. You decided" +
+    madLib: "After escaping the spellbinding effect of the %s Lotus Eaters you landed near the island of the Cyclopes. You decided" +
                " to go exploring where the Cyclopes live and end up being captured by Polyphemus. Within 12 hours of meeting Polyphemus he eats" +
                " four of your men. The need to escape is dire. How do you do so? ",
     answers:[{
@@ -40,7 +41,7 @@ var situations = [{
   },{
     _id: 2,
     title: "Laistrygones",
-    situation: "After almost making it home, your men open the bag of winds and blow you back. You end up in the land of the Laistrygonians." +
+    madLib: "After almost making it home, your men open the bag of winds and blow you back. You end up in the land of the Laistrygonians." +
                "You disembark and send 3 men to find the inhabitants. These men go and implore a young woman to tell them of the king of the land." +
                "To their horror the leader takes one of them and makes dinner of him. As you try to escape with your men...",
     answers:[{
@@ -56,7 +57,7 @@ var situations = [{
   },{
     _id: 3,
     title: "Hades",
-    situation: "Unfortunetaly only your ship escapes the Laistrygonians onslaught of boulder throwing. After saving your men from being pigs the rest of their lives from" + 
+    madLib: "Unfortunetaly only your ship escapes the Laistrygonians onslaught of boulder throwing. After saving your men from being pigs the rest of their lives from" + 
                "the witch Circe, she tells you that you must go to Hades to and speak to Tiresias to find your way home. You rally your men and follow the instructions Circe" +
                "gave you to reach the underworld. After performing the rituals, who do you choose to speak to? ",
     answers:[{
@@ -72,7 +73,7 @@ var situations = [{
   },{//This one has two answers.
     _id: 4,
     title: "The Sirens",
-    situation: "On your way back to Ithaca you must pass the deadly sirens. You have the option to stuff everyone's ears with wax including your own, or you can have" + 
+    madLib: "On your way back to Ithaca you must pass the deadly sirens. You have the option to stuff everyone's ears with wax including your own, or you can have" + 
                " your men tie you up while you listen. Which do you choose?",
     answers:[{
       answerText: "Stuff everyone's ears with wax, including your own",
@@ -87,7 +88,7 @@ var situations = [{
   },{
     _id: 5,
     title: "Calypso",
-    situation: "After passing the Sirens and Scylla and Charybdis, your men disobey you and slaughter Helio's cattle. You and your men are punished by Zeus with a great" +
+    madLib: "After passing the Sirens and Scylla and Charybdis, your men disobey you and slaughter Helio's cattle. You and your men are punished by Zeus with a great" +
                "storm in which only you survive and wash up on Calypso's island. Calypso is quite into you... what do you do?",
     answers:[{
       answerText: "Live on your own, remembering that you have a wife in Ithica, and wait to see if the gods will help you.",
@@ -102,7 +103,7 @@ var situations = [{
   },{
     _id: 6,
     title: "Ithica",
-    situation: "You have returned to Ithaca after the gods decided to convince Calypso to let you return home. You disguised yourself to see who has been loyal to you"+
+    madLib: "You have returned to Ithaca after the gods decided to convince Calypso to let you return home. You disguised yourself to see who has been loyal to you"+
                " all this time. After passing Penolope's test, what do you decide to do with the suitors?",
     answers:[{
       answerText: "Slaughter them all, showing no mercy.",
@@ -114,31 +115,31 @@ var situations = [{
       answerText: "Banish the suitors from Ithaca, making sure that they never have any influence ever again.",
       answerScore: "Different" //different
     }]
-  }];
+  }*/];
 
 
-var situationSchema = mongoose.Schema({
+var madLibSchema = mongoose.Schema({
   _id: Number,
   title: String,
-  situation: String,
+  madLib: String,
   answers:[{
     answerText: String,
-    answerScore: String,
+
   }]
 });
 
-var resultSchema = mongoose.Schema({
+var totalMadLibSchema = mongoose.Schema({
   _id: Date,
   user: String,
   odyssian: Number,
   different: Number,
   brutal: Number,
-  result: String,
+  totalMadLib: String,
 });
 
-var result = mongoose.model('results', resultSchema);
+var totalMadLib = mongoose.model('totalMadLib', totalMadLibSchema);
 
-var situation = mongoose.model('situations', situationSchema);
+var madLib = mongoose.model('madLib', madLibSchema);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console,'connection error: '));
 db.once('open', function(){
@@ -146,8 +147,8 @@ db.once('open', function(){
 
 });
 
-var clearSituations = function(){
-  situation.remove({},function(err){
+var clearMadLibs = function(){
+  madLib.remove({},function(err){
     if(err) {return console.error(err);}
     else
     {
@@ -156,8 +157,8 @@ var clearSituations = function(){
   });
 };
 
-var clearResults = function(){
-  result.remove({},function(err){
+var clearTotalMadLibs = function(){
+  totalMadLib.remove({},function(err){
     if(err) {return console.error(err);}
     else{
 
@@ -166,51 +167,51 @@ var clearResults = function(){
 }
 
 
- var initializeSituations = function()
- {for(var i = 0; i < situations.length; i++){
-    var newSituation = new situation(situations[i]);
-    newSituation.save(function(err,result){
-      console.log("this is the result from saving: " + result);
+ var initializeMadLibs = function()
+ {for(var i = 0; i < madLibs.length; i++){
+    var newMadLib = new madLib(madLibs[i]);
+    newMadLib.save(function(err,totalMadLib){
+      console.log("this is the totalMadLib from saving: " + totalMadLib);
     });
   }
 }
-//clearSituations();
-//initializeSituations();
+clearMadLibs();
+initializeMadLibs();
 //clearResults();
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.sendFile('theJourney.html', { root : 'public' });
 });
 
-router.post('/result', function(req,res,next){
+router.post('/totalMadLib', function(req,res,next){
   var cleanUser = filter.clean(req.body.user);
   var newResult = req.body;
   newResult.user = cleanUser;
   newResult._id = new Date();
-  var resultToSave = new result(newResult);
-  resultToSave.save(function(err,result){
-    console.log(result);
+  var resultToSave = new totalMadLib(newResult);
+  resultToSave.save(function(err,totalMadLib){
+    console.log(totalMadLib);
   });
-  res.json({result:"finished"});
+  res.json({totalMadLib:"finished"});
 });
 
-router.get('/results',function(req,res,next){
-  result.find({}).sort({"_id":'-1'}).exec(function(err,Results){
+router.get('/totalMadLibs',function(req,res,next){
+  totalMadLib.find({}).sort({"_id":'-1'}).exec(function(err,totalMadLibs){
     if(err) return console.error(err);
     else{
-      console.log(Results);
-      res.json(Results);
+      console.log(totalMadLibs);
+      res.json(totalMadLibs);
     }
   })
 });
 
-router.get('/situations', function(req,res,next){
-  console.log("In the situations route");
-  situation.find({}).sort({'_id': '1'}).exec(function(err,Situations){
+router.get('/madLibs', function(req,res,next){
+  console.log("In the madLibs route");
+  madLib.find({}).sort({'_id': '1'}).exec(function(err,madLibs){
     if(err) return console.error(err);
     else{
-      console.log(Situations);
-      res.json(Situations);
+      console.log(madLibs);
+      res.json(madLibs);
     }
   });
 });
