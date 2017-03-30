@@ -11,11 +11,7 @@ function onDataRecieved(response) {
     var boatSounds = $("#boatSound");
     var madLibs = JSON.parse(response);
     console.log(madLibs);
-    var options = {
-        option1: "Option 1",
-        option2: "Option 2",
-        option3: "Option 3"
-    };
+    //Initialize variables.
     var sailTime = 300;     var myAnswers = [];     var myShip = $("#ship");    var endPointX = 0;           var endPointY = 0;
     var angle1 = 0;         var angle2 = 0;         var stopCount = 0;          var wH = $(window).height(); var wW = $(window).width();
     var odyssian = 0;       var different = 0;      var brutal = 0;             var totalResult = []; 
@@ -30,21 +26,32 @@ function onDataRecieved(response) {
             })
         };
 
-    var onwardSwal = function(result){
-        var display = JSON.stringify(result);
-        /*if (result === "option1"){
-          display = madLibs[stopCount].answers[0].answerText;
-          myAnswers.push(madLibs[stopCount].answers[0].answerScore);
-        } 
-        else if(result === "option2")
-        {
-          display = madLibs[stopCount].answers[1].answerText;
-          myAnswers.push(madLibs[stopCount].answers[1].answerScore);;
+        //Used for moving the boat
+    var createParam = function(X, Y, a1,a2){
+        boatSounds[0].play();
+        boatSounds.animate({volume: .5}, 500,function(){
+
+        });
+
+        bezier_params = {
+            start: {
+                x: $("#ship").position().left,
+                y: $("#ship").position().top,
+                angle: a1
+            },
+            end: {
+                x: X,
+                y: Y,
+                angle: a2,
+                length: 1
+                }
         }
-        else{
-          display = madLibs[stopCount].answers[2].answerText;
-          myAnswers.push(madLibs[stopCount].answers[2].answerScore);
-        }*/
+        return bezier_params;
+    }
+
+    var onwardSwal = function(result){
+        addToTotalResult(result);
+        var display = JSON.stringify(result);
         return {
             title:'Onward!',
             html: 'Your answers were:  ' + display,
@@ -68,7 +75,7 @@ function onDataRecieved(response) {
                 {
                     var id = "#swal-input" + String(i+1);
                     console.log(id);
-                    resolveArray.push($(id).val());
+                    resolveArray.push($(id).val().toLowerCase());
                 }
                 resolve(resolveArray);
                 resolveArray = [];
@@ -86,30 +93,11 @@ function onDataRecieved(response) {
 
     var addToTotalResult = function(answers){
         var createMadLib = madLibs[stopCount].madLib;
-        return vsprintf(createMadLib, answers);
+        var madLibCreated = vsprintf(createMadLib,answers);
+        totalResult += madLibCreated;
+        console.log(totalResult);
     }
-    //Used for moving the boat
-    var createParam = function(X, Y, a1,a2){
-        boatSounds[0].play();
-        boatSounds.animate({volume: .5}, 500,function(){
 
-        });
-
-        bezier_params = {
-            start: {
-                x: $("#ship").position().left,
-                y: $("#ship").position().top,
-                angle: a1
-            },
-            end: {
-                x: X,
-                y: Y,
-                angle: a2,
-                length: 1
-                }
-        }
-        return bezier_params;
-    }
 
     var displayResultsSwal =function(results){
         var myResults = JSON.parse(results);
@@ -144,8 +132,7 @@ function onDataRecieved(response) {
           for(var i = 0; i < currentMadLib.answers.length; i++)
           {
             var id = 'swal-input' + String(i+1);  
-            totalInputs += '<input id="' +id + '" class="swal2-input" placeHolder=' + currentMadLib.answers[i].answerText + '>';
-            //resolveArray.push(id);
+            totalInputs += '<input id="' +id + '" class="swal2-input" placeHolder="' + currentMadLib.answers[i].answerText + '">';
           }
           console.log(totalInputs);
           return totalInputs;       
@@ -193,7 +180,6 @@ swal({
 
     var firstStop = function() {
         swal(getSwalStop("The Lotus Eaters")).then(function(result){
-            addToTotalResult(result);
             swal(onwardSwal(result)).then(function(){
                 stopCount++;
                 endPointX = wW * .13; endPointY = wH * .62; angle1 = 10; angle2 = 17;
@@ -214,7 +200,6 @@ swal({
 
     var thirdStop = function() {
         swal(getSwalStop("The Laistrygonians")).then(function(result){
-           
             swal(onwardSwal(result)).then(function(){
                 stopCount++;
                 endPointX = wW * .16; endPointY = wH * .10; angle1 = 343; angle2 = 30;
@@ -225,7 +210,6 @@ swal({
 
     var fourthStop = function() {
         swal(getSwalStop("Hades")).then(function(result){
-        
             swal(onwardSwal(result)).then(function(){
                 stopCount++;
                 endPointX = wW * .25; endPointY = wH * .35; angle1 = 33; angle2 = 315;
@@ -236,7 +220,6 @@ swal({
 
     var fifthStop = function() {
         swal(getSwalStop("The Sirens")).then(function(result){
-      
             swal(onwardSwal(result)).then(function(){
                 stopCount++;
                 endPointX = wW * .37; endPointY = wH * .63; angle1 = 326.565; angle2 = 47.452;
