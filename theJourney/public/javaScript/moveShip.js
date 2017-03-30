@@ -8,7 +8,6 @@ $(document).ready(function(){
 
 function onDataRecieved(response) {
     var questions = JSON.parse(response);
-    console.log(questions);
     var text1 ="<span>This is the question</span><br><span>1. Answer</span><br><span>2. Answer</span><br><span>3. Answer</span>";
     var options = {
         option1: "Option 1",
@@ -22,7 +21,7 @@ function onDataRecieved(response) {
     var angle1 = 0;
     var angle2 = 0;
     var stopCount = 0;
-    var shipSpeed = 150;
+    var shipSpeed = 1500;
     var wH = $(window).height();
     var wW = $(window).width();
     var validate =
@@ -124,7 +123,7 @@ swal({
         endPointX = wW * .60;
         endPointY = wH * .65;
         angle2 = 40;
-        myShip.animate({path : new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2)),},150, 'linear',startVoyage);
+        myShip.animate({path : new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2)),},shipSpeed, 'linear',startVoyage);
     });
 
     var startVoyage = function()  {
@@ -142,7 +141,6 @@ swal({
         swal(getSwalStop("The Lotus Eaters")).then(function(result){
             swal(onwardSwal(result)).then(function(){
                 stopCount++;
-                console.log("Score after first stop: " + currScore);
                 endPointX = wW * .15; endPointY = wH * .60; angle1 = 10; angle2 = 17;
                 myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, shipSpeed, 'linear', secondStop);
             });
@@ -154,7 +152,6 @@ swal({
         swal(getSwalStop("The Cyclops")).then(function(result){
             swal(onwardSwal(result)).then(function(){
                 stopCount++;
-                  console.log("Score after second stop: " + currScore);
                 endPointX = wW * .11; endPointY = wH * .15; angle1 = 45; angle2 = 329;
                 myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, shipSpeed, 'linear',thirdStop);
             });
@@ -167,7 +164,6 @@ swal({
            
             swal(onwardSwal(result)).then(function(){
                 stopCount++;
-                console.log("Score after third stop: " + currScore);
                 endPointX = wW * .16; endPointY = wH * .10; angle1 = 343; angle2 = 30;
                 myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, shipSpeed, 'linear',fourthStop);
             });
@@ -180,7 +176,6 @@ swal({
         
             swal(onwardSwal(result)).then(function(){
                 stopCount++;
-                console.log("Score after fourth stop: " + currScore);
                 endPointX = wW * .25; endPointY = wH * .35; angle1 = 33; angle2 = 315;
                 myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, shipSpeed, 'linear',fifthStop);
             });
@@ -193,7 +188,6 @@ swal({
       
             swal(onwardSwal(result)).then(function(){
                 stopCount++;
-                console.log("Score after fifth stop: " + currScore);
                 endPointX = wW * .37; endPointY = wH * .63; angle1 = 326.565; angle2 = 47.452;
                 myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))},shipSpeed, 'linear',sixthStop);
             });
@@ -227,7 +221,6 @@ swal({
             url: '/quizResult',
             data: resultObject,
             success: function(data){
-                console.log(data);
                 swal({
                     type: 'success',
                     title: "Thank you " + result + "!" 
@@ -244,7 +237,6 @@ swal({
                 totalHTML +=  "<li class='scoreItem'>" + "<span>   " + scoreList[i].user + ": " + scoreList[i].score; + "</span></li>";
             }
             totalHTML +="</ol>";
-            console.log(totalHTML);
             swal({
                 title: "Top 10 Scores: ",
                 html: totalHTML,

@@ -153,8 +153,8 @@ var setQuestions = function(){
   }
 };
 
-removeQuestions();
-setQuestions();
+//removeQuestions();
+//setQuestions();
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.sendFile('theJourney.html', { root : 'public' });
