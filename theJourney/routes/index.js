@@ -51,7 +51,7 @@ var madLibs = [{
     madLib: "   After almost making it home, your men open the bag of <strong>%s</strong> that blows you back. You end up\n"+
             "in the land of the Laestrygonians. You disembark and send <strong>%s</strong> men to find the inhabitants. These\n"+
             "men go and implore a <strong>%s</strong> woman to tell them the whereabouts of the king. To their horror the\n" +
-            "<strong>%s</strong>king takes one of them and makes dinner of him. As you try to escape a <strong>%s</strong> <strong>%s</strong> you. Luckily,\n"+
+            "<strong>%s</strong> king takes one of them and makes dinner of him. As you try to escape a <strong>%s</strong> <strong>%s</strong> you. Luckily,\n"+
             "you make it back to your ship and sail off.\n\n", 
     answers:[{
       answerText: "Plural noun",
@@ -71,8 +71,8 @@ var madLibs = [{
     title: "Hades",
     madLib: "   Unfortunetaly only your ship escapes the Laistrygonians onslaught of <strong>%s</strong> throwing. After saving\n"+
             "your men from being <strong>%s</strong> the rest of their lives due to the witch Circe, she tells you that you must\n"+
-            "go to Hades to and speak to <strong>%s</strong> to find your way home. You <strong>%s</strong> your men and follow the instructions\n"+
-            "Circe gave you to reach the underworld. After performing the rituals, you end up taking with <strong>%s</strong>. He\n"+
+            "go to Hades to and speak to <strong>%s</strong> to find your way home. You rally your men and follow the instructions\n"+
+            "Circe gave you to reach the underworld. After performing the rituals, you end up talking with <strong>%s</strong>. He\n"+
             "tells you of a <strong>%s</strong> that <strong>%s</strong> a lot.\n\n",
     answers:[{
       answerText: "Singular noun",
@@ -80,8 +80,6 @@ var madLibs = [{
       answerText: "Plural noun",
     },{
       answerText: "Name",
-    },{
-      answerText: "Present tense verb"
     },{
       answerText: "Name"
     },{
