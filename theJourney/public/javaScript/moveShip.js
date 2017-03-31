@@ -10,7 +10,6 @@ $(document).ready(function(){
 function onDataRecieved(response) {
     var boatSounds = $("#boatSound");
     var madLibs = JSON.parse(response);
-    console.log(madLibs);
     //Initialize variables.
     var sailTime = 300;     var myAnswers = [];     var myShip = $("#ship");    var endPointX = 0;           var endPointY = 0;
     var angle1 = 0;         var angle2 = 0;         var stopCount = 0;          var wH = $(window).height(); var wW = $(window).width();
@@ -56,6 +55,8 @@ function onDataRecieved(response) {
             html: '<pre>' + addToTotalResult(result) + '</pre',
             width: 'auto',
             background: '#332106 url(../oldPaper.jpg)',
+            allowOutsideClick: false,
+            allowEscapeKey: false,
         };
     }
 
@@ -74,7 +75,6 @@ function onDataRecieved(response) {
                 for(var i = 0; i < madLibs[stopCount].answers.length; i++)
                 {
                     var id = "#swal-input" + String(i+1);
-                    console.log(id);
                     resolveArray.push($(id).val().toLowerCase());
                 }
                 resolve(resolveArray);
@@ -100,14 +100,11 @@ function onDataRecieved(response) {
 
     var createMadLibInput = function(currentMadLib){
           var totalInputs = "";
-          console.log(currentMadLib);
-          console.log(currentMadLib.answers.length);
           for(var i = 0; i < currentMadLib.answers.length; i++)
           {
             var id = 'swal-input' + String(i+1);  
             totalInputs += '<input id="' +id + '" class="swal2-input" placeHolder="' + currentMadLib.answers[i].answerText + '">';
           }
-          console.log(totalInputs);
           return totalInputs;       
     }
 
@@ -120,15 +117,120 @@ function onDataRecieved(response) {
             html: totalMadLib,
             background: '#332106 url(../oldPaper.jpg)',
             width: "auto",
+            allowOutsideClick: false,
+            allowEscapeKey: false,
         }).then(function(){
            getUsername();
         });
     }
 
     var getUsername = function(){
-        
+        swal({
+            title: "Record results",
+            input: 'text',
+            confirmButtonText: 'Submit',
+            showLoaderOnConfirm: true,
+            inputPlaceHolder: 'Enter your name!',
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+        }).then(function(result){
+            var madLibAndUser ={
+                user: result,
+                totalMadLib: totalResult
+            }
+            $.ajax({
+                type: "POST",
+                url: '/totalMadLib',
+                data: madLibAndUser,
+                success: function(data){
+                    thankyouSwal(result);
+                }
+            });
+        });
+    }
+    var people = [];
+    var thankyouSwal = function(result){
+        swal({
+            type: 'success', 
+            title: "Thank you " + result,
+            confirmButtonText: "Again?",
+            showCancelButton: true,
+            cancelButtonText: 'Other stories',
+            cancelButtonClass: 'btn btn-primary',
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+        }).then(function(){
+            location.reload(false);
+        },function(dismiss){
+            if(dismiss='cancel'){
+                getAllStories();
+            }
+        });
     }
 
+
+
+
+    var getAllStories = function(){
+        $.get('/totalMadLibs',function(data){
+            var jsonData = data;
+            console.log(jsonData);
+            var totalHtml = '<input id="searchBar" type="text" placeHolder="Search by name"><ul>';
+            console.log(jsonData.length);
+            for(var i = 0; i < jsonData.length; i++)
+            {
+                people.push(jsonData[i].user.toUpperCase());
+                var id = 'story' + String(i);
+                totalHtml += '<li class="user">' + jsonData[i].user + 
+                             '<ul class="story" id="'+ id +'"><li><pre>' + jsonData[i].totalMadLib + '</pre></li></ul>' + 
+                             '</li>';
+            }
+            totalHtml += '</ul>';
+            console.log(people);
+            swal({
+                title: 'Other Stories:',
+                html: totalHtml,
+                width: 'auto',
+                customClass: 'swal-wide',
+                background: '#332106 url(../oldPaper.jpg)',
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+            });
+        });
+    }
+
+    $('#searchBar').live('keyup',function(index)
+    {
+        var value = $('#searchBar').val();
+        var users = $('.user');
+        console.log(value);
+        /*if(value === "")
+        {
+            users.css('display', 'block');
+        }*/
+        for(var i = 0; i < people.length; i++)
+        {
+            if(!people[i].includes(value.toUpperCase(),0))
+            {
+                users[i].style.display='none';
+            }
+            else if(people[i].includes(value.toUpperCase(),0))
+            {
+                users[i].style.display='block';
+            }
+        }
+    });
+
+    $('.user').live('click',function(index){
+        var toShow ="#" + index.currentTarget.firstElementChild.id;
+        if($(toShow).css('display') == 'none')
+        {
+            $(toShow).css({display: 'block'}).hide().slideDown();
+        }
+        else{
+            $(toShow).slideToggle();
+        }
+    });
 
 //Start
 swal({

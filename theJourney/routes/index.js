@@ -160,9 +160,6 @@ var madLibSchema = mongoose.Schema({
 var totalMadLibSchema = mongoose.Schema({
   _id: Date,
   user: String,
-  odyssian: Number,
-  different: Number,
-  brutal: Number,
   totalMadLib: String,
 });
 
