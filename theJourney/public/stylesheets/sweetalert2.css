@@ -142,7 +142,7 @@ body.swal2-iosfix {
   .swal2-modal .swal2-select,
   .swal2-modal .swal2-radio,
   .swal2-modal .swal2-checkbox {
-    margin: 20px auto; }
+    margin: 5px auto; }
   .swal2-modal .swal2-input,
   .swal2-modal .swal2-file,
   .swal2-modal .swal2-textarea {

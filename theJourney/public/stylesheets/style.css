@@ -44,7 +44,7 @@ body{
 
 #theStory{
   text-align: left;
-  width:80%;
+  width:auto;
 }
 
 ::-webkit-input-placeholder{

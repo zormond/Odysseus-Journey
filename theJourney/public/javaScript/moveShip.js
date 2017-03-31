@@ -15,8 +15,7 @@ function onDataRecieved(response) {
     var sailTime = 300;     var myAnswers = [];     var myShip = $("#ship");    var endPointX = 0;           var endPointY = 0;
     var angle1 = 0;         var angle2 = 0;         var stopCount = 0;          var wH = $(window).height(); var wW = $(window).width();
     var odyssian = 0;       var different = 0;      var brutal = 0;             var totalResult = []; 
-    var validate =
-        function (result) {
+    var validate = function (result) {
             return new Promise(function (resolve, reject) {
                 if (result) {
                     resolve()
@@ -50,11 +49,12 @@ function onDataRecieved(response) {
     }
 
     var onwardSwal = function(result){
-        addToTotalResult(result);
+        
         var display = JSON.stringify(result);
         return {
             title:'Onward!',
-            html: 'Your answers were:  ' + display,
+            html: '<pre>' + addToTotalResult(result) + '</pre',
+            width: 'auto',
             background: '#332106 url(../oldPaper.jpg)',
         };
     }
@@ -95,35 +95,8 @@ function onDataRecieved(response) {
         var createMadLib = madLibs[stopCount].madLib;
         var madLibCreated = vsprintf(createMadLib,answers);
         totalResult += madLibCreated;
-        console.log(totalResult);
+        return madLibCreated;
     }
-
-
-    var displayResultsSwal =function(results){
-        var myResults = JSON.parse(results);
-        console.log(myResults);
-        var totalHTML = "<ul id='resultList'>";
-        for(var i = 0; i < myResults.length; i++){
-            totalHTML += "<li id='listItem'>" + myResults[i].user + ":" +
-                            "<ul>" +
-                                "<li id='fullResult'>Full result: " +myResults[i].result + "</li>" + 
-                                "<li>Odyssian: " + myResults[i].odyssian + "</li>" +
-                                "<li>Brutal: " + myResults[i].brutal + "</li>" + 
-                                "<li>Different: " + myResults[i].different + "</li>" +
-                            "</ul>" + 
-                         "</li>";
-        }
-        totalHTML += "</ul>";
-        swal({
-            title: "Here are everyone's results: ",
-            html: totalHTML,
-            background: '#332106 url(../oldPaper.jpg)',
-            confirmButtonText: "Play again?"
-        }).then(function(){
-            location.reload(false)
-        });
-    }
-
 
     var createMadLibInput = function(currentMadLib){
           var totalInputs = "";
@@ -148,8 +121,12 @@ function onDataRecieved(response) {
             background: '#332106 url(../oldPaper.jpg)',
             width: "auto",
         }).then(function(){
-           
+           getUsername();
         });
+    }
+
+    var getUsername = function(){
+        
     }
 
 
