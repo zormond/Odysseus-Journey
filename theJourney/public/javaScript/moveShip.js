@@ -168,7 +168,7 @@ function onDataRecieved(response) {
         });
     }
 
-
+    
 
 
     var getAllStories = function(){
@@ -181,7 +181,8 @@ function onDataRecieved(response) {
             {
                 people.push(jsonData[i].user.toUpperCase());
                 var id = 'story' + String(i);
-                totalHtml += '<li class="user">' + jsonData[i].user + 
+                var userId = 'user' + String(i);
+                totalHtml += '<li class="user" id="'+userId + '">' + jsonData[i].user + 
                              '<ul class="story" id="'+ id +'"><li><pre>' + jsonData[i].totalMadLib + '</pre></li></ul>' + 
                              '</li>';
             }
@@ -195,6 +196,8 @@ function onDataRecieved(response) {
                 background: '#332106 url(../oldPaper.jpg)',
                 allowOutsideClick: false,
                 allowEscapeKey: false,
+            }).then(function(){
+                location.reload(false);
             });
         });
     }
@@ -232,13 +235,32 @@ function onDataRecieved(response) {
         }
     });
 
+    $('.user').live('mouseover', function(index){
+            console.log(index);
+            var toShow ="#" + index.currentTarget.firstElementChild.id;
+            var mine ="#" + index.currentTarget.id;
+            if($(toShow).css('display') == 'none')
+            {
+                $(mine).css("opacity", ".5");
+            }
+        });
+
+    $('.user').live('mouseout', function(index){
+            var mine ="#" + index.currentTarget.id;
+            $(mine).css("opacity", "1"); 
+        });
+     
+
 //Start
 swal({
         title:"Welcome to Odysseus' Journey!",
         text: "The point of this is for you to take Odysseus position to see what kind of leader you are compared to Odysseus.",
         background: '#332106 url(../oldPaper.jpg)',
         width: '75%',
-        padding: 75,
+        padding: 75,            
+        showCancelButton: true,
+        cancelButtonText: 'Show stories',
+        cancelButtonClass: 'btn btn-primary',
         allowOutsideClick: false,
         allowEscapeKey: false
     }).then(function(){
@@ -246,6 +268,10 @@ swal({
         endPointY = wH * .65;
         angle2 = 40;
         myShip.animate({path : new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2)),},sailTime, 'linear',startVoyage);
+    },function(dismiss){
+            if(dismiss='cancel'){
+                getAllStories();
+            }
     });
 
     var startVoyage = function()  {

@@ -55,6 +55,8 @@ body{
 .user{
   text-align: left;
   list-style-type: none;
+  cursor: pointer !important;
+  width:10%;
 }
 
 .story{
@@ -63,6 +65,6 @@ body{
 }
 
 .swal-wide{
-  min-width: 85% !important;
+  min-width: 90% !important;
 }
 
