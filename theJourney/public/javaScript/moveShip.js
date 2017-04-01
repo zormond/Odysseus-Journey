@@ -139,7 +139,7 @@ function onDataRecieved(response) {
                             "<div class='col-xs-8 col-sm-8 col-md-8 col-lg-8'>" + 
                                 "<div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'>" + 
                                     "<ul class='words'>"+wordList + "</ul>" +  
-                                "<button id='newWordsButton'>New Words</button></div>" +  
+                                "<button id='newWordsButton' class='btn btn-default'>New Words</button></div>" +  
                             "</div>"+
                          "</div></div>";
           return totalInputs;       
@@ -301,7 +301,7 @@ function onDataRecieved(response) {
 
 swal({
         title:"Welcome to Odysseus' Journey!",
-        html: "<h3 id='welcome'> The point of this is for you to take Odysseus position to see what kind of leader you are compared to Odysseus.</h3>",
+        html: "<h3 id='welcome'>Recreate the Odyssey</h3>",
         background: '#332106 url(../oldPaper.jpg)',
         width: '75%',
         padding: 50,            
