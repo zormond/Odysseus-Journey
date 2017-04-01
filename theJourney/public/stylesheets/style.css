@@ -59,12 +59,28 @@ body{
   width:10%;
 }
 
+pre{
+  overflow: visible;
+  border: none;
+  font-size: .875em;
+  background-color: transparent;
+}
+
+.swal2-modal .swal2-styled + .swal2-styled {
+  margin-top: 0px;
+}
+
+.words{
+  list-style-type: none;
+}
+
+
 .story{
   display: none;
   list-style-type: none;
 }
 
 .swal-wide{
-  min-width: 90% !important;
+  min-width: 75% !important;
 }
 

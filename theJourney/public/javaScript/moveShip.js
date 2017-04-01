@@ -1,11 +1,51 @@
 $(document).ready(function(){
+    getRandomAdjectives();
+    getRandomNouns();
+    getRandomVerbs();
     $("#music")[0].volume = .05;
+});
+var adjectivesReceived = false; var nounsReceived = false; var verbsReceived = false;
+var adjectives;     var nouns;      var verbs;
+var adjList = "<ul class='words'>";     var nounList  = "<ul class='words'>"; verbList = "<ul class='words'>";
+var getRandomAdjectives = function(){
+    $.get('/randomWords?a=adjective',function(data){
+        adjectives = JSON.parse(data);
+          for(var i = 0; i < adjectives.length; i++){
+            adjList +="<li>" + adjectives[i].word + "</li>";
+          }
+          adjList += "</ul>";
+          adjectivesReceived = true;
+    });
+}
+
+var getRandomNouns = function(){
+    $.get('/randomWords?a=noun',function(data){
+        nouns = JSON.parse(data);
+          for(var i = 0; i < nouns.length; i++){
+            nounList +="<li>" + nouns[i].word + "</li>";
+          }
+          nounList += "</ul>";
+          console.log(nouns);
+          nounsReceived = true;
+    });
+}
+
+var getRandomVerbs = function(){
+    $.get('/randomWords?a=verb',function(data){
+        verbs = JSON.parse(data);
+          for(var i = 0; i < verbs.length; i++){
+            verbList +="<li>" + verbs[i].word + "</li>";
+          }
+          verbList += "</ul>";
+        console.log(verbList);
+        verbsReceived = true;
     $.ajax({
         url:"/madLibs",
         dataType:"application/json",
         success:onDataRecieved
-    })
-});
+    });
+    });
+}
 
 function onDataRecieved(response) {
     var boatSounds = $("#boatSound");
@@ -52,7 +92,7 @@ function onDataRecieved(response) {
         var display = JSON.stringify(result);
         return {
             title:'Onward!',
-            html: '<pre>' + addToTotalResult(result) + '</pre',
+            html: '<pre class="unstyled">' + addToTotalResult(result) + '</pre>',
             width: 'auto',
             background: '#332106 url(../oldPaper.jpg)',
             allowOutsideClick: false,
@@ -99,12 +139,28 @@ function onDataRecieved(response) {
     }
 
     var createMadLibInput = function(currentMadLib){
-          var totalInputs = "";
+
+          var totalInputs = "<div class='container-fluid'><div class='row'><div id='myInputs' class='col-xs-4 col-sm-4 col-md-4 col-lg-4'>";
           for(var i = 0; i < currentMadLib.answers.length; i++)
           {
             var id = 'swal-input' + String(i+1);  
             totalInputs += '<input id="' +id + '" class="swal2-input" placeHolder="' + currentMadLib.answers[i].answerText + '">';
           }
+          totalInputs += "</div>" +
+                            "<div class='col-xs-8 col-sm-8 col-md-8 col-lg-8'>Random words" + 
+                            "<div class='row'>" +
+                                "<div class='col-xs-4 col-sm-4 col-md-4 col-lg-4'>" + 
+                                    adjList +
+                                "</div>" + 
+                                "<div class='col-xs-4 col-sm-4 col-md-4 col-lg-4'>" +
+                                    nounList +
+                                "</div>" +
+                                "<div class='col-xs-4 col-sm-4 col-md-4 col-lg-4'>" +
+                                    verbList +
+                                "</div>" +
+                            "</div>" +
+                            "</div>"+
+                         "</div></div>";
           return totalInputs;       
     }
 
@@ -251,13 +307,12 @@ function onDataRecieved(response) {
         });
      
 
-//Start
 swal({
         title:"Welcome to Odysseus' Journey!",
-        text: "The point of this is for you to take Odysseus position to see what kind of leader you are compared to Odysseus.",
+        html: "<h3 id='welcome'> The point of this is for you to take Odysseus position to see what kind of leader you are compared to Odysseus.</h3>",
         background: '#332106 url(../oldPaper.jpg)',
         width: '75%',
-        padding: 75,            
+        padding: 50,            
         showCancelButton: true,
         cancelButtonText: 'Show stories',
         cancelButtonClass: 'btn btn-primary',

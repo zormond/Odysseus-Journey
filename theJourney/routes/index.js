@@ -2,6 +2,7 @@ var express = require('express');
 var mongoose = require('mongoose');
 var router = express.Router();
 var Filter = require("bad-words"), filter = new Filter();
+var request = require('request');
 
 mongoose.connect('mongodb://localhost/OdysseusDB');
 
@@ -227,6 +228,19 @@ router.get('/totalMadLibs',function(req,res,next){
       res.json(totalMadLibs);
     }
   })
+});
+
+router.get('/randomWords', function(req,res,next){
+  console.log("query: " + req.query.a);
+  var url = 'http://api.wordnik.com:80/v4/words.json/randomWords?hasDictionaryDef=true&includePartOfSpeech=' + req.query.a +
+            '&minCorpusCount=25&maxCorpusCount=-1&minDictionaryCount=10&maxDictionaryCount=-1&minLength=5&maxLength=-1&limit=10'+
+            '&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5';
+  request.get(url,function(error,response,body){
+    //console.log(error);
+    //console.log(response);
+    console.log(body);
+    res.json(body);
+  });
 });
 
 router.get('/madLibs', function(req,res,next){
