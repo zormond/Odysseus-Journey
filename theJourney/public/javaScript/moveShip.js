@@ -1,51 +1,44 @@
 $(document).ready(function(){
-    getRandomAdjectives();
-    getRandomNouns();
-    getRandomVerbs();
-    $("#music")[0].volume = .05;
-});
-var adjectivesReceived = false; var nounsReceived = false; var verbsReceived = false;
-var adjectives;     var nouns;      var verbs;
-var adjList = "<ul class='words'>";     var nounList  = "<ul class='words'>"; verbList = "<ul class='words'>";
-var getRandomAdjectives = function(){
-    $.get('/randomWords?a=adjective',function(data){
-        adjectives = JSON.parse(data);
-          for(var i = 0; i < adjectives.length; i++){
-            adjList +="<li>" + adjectives[i].word + "</li>";
-          }
-          adjList += "</ul>";
-          adjectivesReceived = true;
-    });
-}
-
-var getRandomNouns = function(){
-    $.get('/randomWords?a=noun',function(data){
-        nouns = JSON.parse(data);
-          for(var i = 0; i < nouns.length; i++){
-            nounList +="<li>" + nouns[i].word + "</li>";
-          }
-          nounList += "</ul>";
-          console.log(nouns);
-          nounsReceived = true;
-    });
-}
-
-var getRandomVerbs = function(){
-    $.get('/randomWords?a=verb',function(data){
-        verbs = JSON.parse(data);
-          for(var i = 0; i < verbs.length; i++){
-            verbList +="<li>" + verbs[i].word + "</li>";
-          }
-          verbList += "</ul>";
-        console.log(verbList);
-        verbsReceived = true;
+    //getRandomAdjectives();
+    //getRandomNouns();
+    //getRandomVerbs();
     $.ajax({
         url:"/madLibs",
         dataType:"application/json",
         success:onDataRecieved
     });
+    $("#music")[0].volume = .05;
+});
+
+    var randomWords; 
+    var wordList = "";
+
+    var getRandomWords = function(resolve){
+    $.get('/randomWords',function(data){
+        randomWords = data;
+        console.log(data);
+          for(var i = 0; i < randomWords.length; i++){ //Create list from getting random words.
+            wordList +="<li>" + randomWords[i] + "</li>";
+          }
+        if(resolve != null)
+        {
+            resolve();
+        }
+        console.log(wordList);
     });
 }
+
+    var getRandomWordsWithoutResolve =function(){
+        $.get('/randomWords',function(data){
+        newWords = data;
+        console.log(newWords);
+          for(var i = 0; i < newWords.length; i++){ //Create list from getting random words.
+            wordList +="<li>" + newWords[i] + "</li>";
+          }
+        $('.words')[0].innerHTML = wordList;
+        $('.words').slideDown();
+        });
+    }
 
 function onDataRecieved(response) {
     var boatSounds = $("#boatSound");
@@ -67,10 +60,7 @@ function onDataRecieved(response) {
         //Used for moving the boat
     var createParam = function(X, Y, a1,a2){
         boatSounds[0].play();
-        boatSounds.animate({volume: .5}, 500,function(){
-
-        });
-
+        boatSounds.animate({volume: .5}, 500);
         bezier_params = {
             start: {
                 x: $("#ship").position().left,
@@ -88,7 +78,6 @@ function onDataRecieved(response) {
     }
 
     var onwardSwal = function(result){
-        
         var display = JSON.stringify(result);
         return {
             title:'Onward!',
@@ -146,19 +135,11 @@ function onDataRecieved(response) {
             var id = 'swal-input' + String(i+1);  
             totalInputs += '<input id="' +id + '" class="swal2-input" placeHolder="' + currentMadLib.answers[i].answerText + '">';
           }
-          totalInputs += "</div>" +
-                            "<div class='col-xs-8 col-sm-8 col-md-8 col-lg-8'>Random words" + 
-                            "<div class='row'>" +
-                                "<div class='col-xs-4 col-sm-4 col-md-4 col-lg-4'>" + 
-                                    adjList +
-                                "</div>" + 
-                                "<div class='col-xs-4 col-sm-4 col-md-4 col-lg-4'>" +
-                                    nounList +
-                                "</div>" +
-                                "<div class='col-xs-4 col-sm-4 col-md-4 col-lg-4'>" +
-                                    verbList +
-                                "</div>" +
-                            "</div>" +
+          totalInputs += "</div>" + //Create html for random words.
+                            "<div class='col-xs-8 col-sm-8 col-md-8 col-lg-8'>" + 
+                                "<div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'>" + 
+                                    "<ul class='words'>"+wordList + "</ul>" +  
+                                "<button id='newWordsButton'>New Words</button></div>" +  
                             "</div>"+
                          "</div></div>";
           return totalInputs;       
@@ -258,6 +239,17 @@ function onDataRecieved(response) {
         });
     }
 
+
+    //Live functions
+    $('#newWordsButton').live('click',function(){
+        $('.words').slideUp('fast',function(){
+            console.log("i got clicked");
+            wordList = [];
+            randomWords = "";
+            newList = getRandomWordsWithoutResolve();
+        });
+    });
+
     $('#searchBar').live('keyup',function(index)
     {
         var value = $('#searchBar').val();
@@ -305,7 +297,7 @@ function onDataRecieved(response) {
             var mine ="#" + index.currentTarget.id;
             $(mine).css("opacity", "1"); 
         });
-     
+     //End of live functions
 
 swal({
         title:"Welcome to Odysseus' Journey!",
@@ -317,7 +309,13 @@ swal({
         cancelButtonText: 'Show stories',
         cancelButtonClass: 'btn btn-primary',
         allowOutsideClick: false,
-        allowEscapeKey: false
+        allowEscapeKey: false,
+        showLoaderOnConfirm: true,
+        preConfirm: function(){
+            return new Promise(function(resolve){
+                getRandomWords(resolve);
+            });
+        }
     }).then(function(){
         endPointX = wW * .60;
         endPointY = wH * .65;
@@ -360,7 +358,7 @@ swal({
     }
 
     var thirdStop = function() {
-        swal(getSwalStop("The Laistrygonians")).then(function(result){
+        swal(getSwalStop("The Laestrygonians")).then(function(result){
             swal(onwardSwal(result)).then(function(){
                 stopCount++;
                 endPointX = wW * .16; endPointY = wH * .10; angle1 = 343; angle2 = 30;
