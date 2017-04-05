@@ -1,6 +1,6 @@
     
- //################################################################### 
- //These functions are used to created the random words displayed on each swal.
+ /*###################################################################*/ 
+ /*These functions are used to created the random words displayed on each swal.*/
 
 var randomWords; 
 var wordList = "";
@@ -17,7 +17,7 @@ var getRandomWords = function(resolve){
         }
         console.log(wordList);
     });
-}
+};
 
 var getRandomWordsWithoutResolve =function(){
         $.get('/randomWords',function(data){
@@ -29,10 +29,10 @@ var getRandomWordsWithoutResolve =function(){
         $('.words')[0].innerHTML = wordList;
         $('.words').slideDown();
         });
-}
+};
 
-//############################################################################
-//These live functions are used to animations throughout the project.
+/*############################################################################
+These live functions are used to animations throughout the project.*/
 
 var people = [];
 $('#newWordsButton').live('click',function(){
@@ -87,8 +87,8 @@ $('.user').live('mouseout', function(index){
         var mine ="#" + index.currentTarget.id;
         $(mine).css("opacity", "1"); 
     });
-//#######################################################################
-//Helper functions for creating madLibs.
+/*#######################################################################
+//Helper functions for creating madLibs.*/
 
 
 var addToTotalResult = function(answers){
@@ -96,15 +96,15 @@ var addToTotalResult = function(answers){
     var madLibCreated = vsprintf(createMadLib,answers);
     totalResult += madLibCreated;
     return madLibCreated;
-}
+};
 
 var createMadLibInput = function(currentMadLib){
 
         var totalInputs = "<div class='container-fluid'><div class='row'><div id='myInputs' class='col-xs-4 col-sm-4 col-md-4 col-lg-4'>";
         for(var i = 0; i < currentMadLib.answers.length; i++)
         {
-        var id = 'swal-input' + String(i+1);  
-        totalInputs += '<input id="' +id + '" class="swal2-input" placeHolder="' + currentMadLib.answers[i].answerText + '">';
+            var id = 'swal-input' + String(i+1);  
+            totalInputs += '<input id="' +id + '" class="swal2-input" placeHolder="' + currentMadLib.answers[i].answerText + '">';
         }
         totalInputs += "</div>" + //Create html for random words.
                         "<div class='col-xs-8 col-sm-8 col-md-8 col-lg-8'>" + 
@@ -114,14 +114,14 @@ var createMadLibInput = function(currentMadLib){
                         "</div>"+
                         "</div></div>";
         return totalInputs;       
-}
+};
 
-//###########################################################
-//Swal functions. These are the basic templates for the swal functions that are used throughout.
+/*/###########################################################
+//Swal functions. These are the basic templates for the swal functions that are used throughout.*/
 
 var finalswal = function(result)
 {
-    var totalMadLib ="<pre id='theStory'>" + totalResult + "</pre>"
+    var totalMadLib ="<pre id='theStory'>" + totalResult + "</pre>";
     swal({
         title: "The Odyssey according to you: ",
         html: totalMadLib,
@@ -132,7 +132,7 @@ var finalswal = function(result)
     }).then(function(){
         getUsername();
     });
-}
+};
 
 var getUsername = function(){
     swal({
@@ -147,7 +147,7 @@ var getUsername = function(){
         var madLibAndUser ={
             user: result,
             totalMadLib: totalResult
-        }
+        };
         $.ajax({
             type: "POST",
             url: '/totalMadLib',
@@ -157,7 +157,7 @@ var getUsername = function(){
             }
         });
     });
-}
+};
 
 var thankyouSwal = function(result){
     swal({
@@ -176,7 +176,7 @@ var thankyouSwal = function(result){
             getAllStories();
         }
     });
-}
+};
 
 var getAllStories = function(){
     $.get('/totalMadLibs',function(data){
@@ -207,7 +207,7 @@ var getAllStories = function(){
             location.reload(false);
         });
     });
-}
+};
 
 var onwardSwal = function(result){
     var display = JSON.stringify(result);
@@ -219,7 +219,7 @@ var onwardSwal = function(result){
         allowOutsideClick: false,
         allowEscapeKey: false,
     };
-}
+};
 
 var resolveArray = [];
 var getSwalStop = function(name){
@@ -249,8 +249,8 @@ var getSwalStop = function(name){
         padding: 75,
         allowOutsideClick: false,
         allowEscapeKey: false,
-    }
+    };
 
-}
+};
 
-//###########################################################################
+/*###########################################################################*/

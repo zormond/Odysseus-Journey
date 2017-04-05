@@ -1,7 +1,4 @@
 $(document).ready(function(){
-    //getRandomAdjectives();
-    //getRandomNouns();
-    //getRandomVerbs();
     $.ajax({
         url:"/madLibs",
         dataType:"application/json",
@@ -17,7 +14,7 @@ var boatSounds;
 function onDataRecieved(response) {
 
     madLibs = JSON.parse(response);
-    //Initialize variables.
+    /*Initialize variables.*/
     var sailTime = 300;     var myAnswers = [];     var myShip = $("#ship");    var endPointX = 0;           var endPointY = 0;
     var angle1 = 0;         var angle2 = 0;         var wH = $(window).height(); var wW = $(window).width();
     var odyssian = 0;       var different = 0;      var brutal = 0;             boatSounds = $("#boatSound");     
@@ -31,7 +28,7 @@ function onDataRecieved(response) {
             })
         };
 
-        //Used for moving the boat
+        /*Used for moving the boat*/
     var createParam = function(X, Y, a1,a2){
         boatSounds[0].play();
         boatSounds.animate({volume: .5}, 500);
@@ -47,11 +44,11 @@ function onDataRecieved(response) {
                 angle: a2,
                 length: 1
                 }
-        }
+        };
         return bezier_params;
     }
 
-//Start of the animations.
+/*Start of the animations.*/
     swal({
         title:"Welcome to Odysseus' Journey!",
         html: "<h3 id='welcome'>Recreate the Odyssey</h3>",
@@ -88,7 +85,7 @@ function onDataRecieved(response) {
             myShip.animate({path : new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, sailTime, 'linear', firstStop);
 
         });
-    }
+    };
 
     var firstStop = function() {
         swal(getSwalStop("The Lotus Eaters")).then(function(result){
@@ -98,7 +95,7 @@ function onDataRecieved(response) {
                 myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, sailTime, 'linear', secondStop);
             });
         });
-    }
+    };
 
     var secondStop = function() {
         swal(getSwalStop("The Cyclops")).then(function(result){
@@ -108,7 +105,7 @@ function onDataRecieved(response) {
                 myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, sailTime, 'linear',thirdStop);
             });
         });
-    }
+    };
 
     var thirdStop = function() {
         swal(getSwalStop("The Laestrygonians")).then(function(result){
@@ -118,7 +115,7 @@ function onDataRecieved(response) {
                 myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, sailTime, 'linear',fourthStop);
             });
         });
-    }
+    };
 
     var fourthStop = function() {
         swal(getSwalStop("Hades")).then(function(result){
@@ -127,8 +124,8 @@ function onDataRecieved(response) {
                 endPointX = wW * .25; endPointY = wH * .35; angle1 = 33; angle2 = 315;
                 myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, sailTime, 'linear',fifthStop);
             });
-        })
-    }
+        });
+    };
 
     var fifthStop = function() {
         swal(getSwalStop("The Sirens")).then(function(result){
@@ -138,12 +135,12 @@ function onDataRecieved(response) {
                 myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, sailTime, 'linear',sixthStop);
             });
         });
-    }
+    };
 
     var sixthStop = function() {
         endPointX = wW * .45; endPointY = wH * .34; angle1 =44; angle2 = 317;
         myShip.animate({path: new $.path.bezier(createParam(endPointX,endPointY,angle1,angle2))}, sailTime, 'linear',finalStop);
-    }
+    };
 
     var finalStop = function() {
         swal(getSwalStop("Calypso")).then(function(result){
@@ -162,5 +159,5 @@ function onDataRecieved(response) {
                 });
             });
         });
-    }
+    };
 }
