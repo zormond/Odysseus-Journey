@@ -236,7 +236,7 @@ var getSwalStop = function(name){
             for(var i = 0; i < madLibs[stopCount].answers.length; i++)
             {
                 var id = "#swal-input" + String(i+1);
-                resolveArray.push($(id).val().toLowerCase());
+                resolveArray.push($(id).val();
             }
             resolve(resolveArray);
             resolveArray = [];

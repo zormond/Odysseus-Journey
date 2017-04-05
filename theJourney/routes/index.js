@@ -109,7 +109,7 @@ var madLibs = [{
             "and your are then punished by <strong>%s</strong> with a great storm in which only you survive. You wash up on\n"+
             "Calypso's island. Calypso is quite into you. She asks you,\"Would you like a <strong>%s</strong>?\" You reply,\"No\n"+
             "thank you, I'm <strong>%s</strong>.\" After what seems like a billion offers, you finally accept to stay with her.\n"+
-            "After <strong>%s</strong> years have passed, the <strong>%s</strong> decide to convince Calypso to let you go.\n\n",
+            "After <strong>%s</strong> years have passed, the great <strong>%s</strong> decide to convince Calypso to let you go.\n\n",
     answers:[{
       answerText: "Present tense verb"
     },{
