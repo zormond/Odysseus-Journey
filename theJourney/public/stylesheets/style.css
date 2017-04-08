@@ -62,8 +62,17 @@ body{
 pre{
   overflow: visible;
   border: none;
-  font-size: .875em;
+  font-size: 1em;
+  font-family: 'Times New Roman', Times, serif, cursive !important;
   background-color: transparent;
+}
+
+h2{
+  font-family: 'Times New Roman', Times, serif, cursive !important;
+}
+
+h3{
+  font-family: 'Times New Roman', Times, serif, cursive !important;
 }
 
 .swal2-modal .swal2-styled + .swal2-styled {
@@ -75,6 +84,7 @@ pre{
   -webkit-column-count: 3;
   -moz-column-count: 3;
   column-count: 3;
+  font-family: 'Times New Roman', Times, serif, cursive !important;
 }
 
 

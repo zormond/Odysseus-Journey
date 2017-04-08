@@ -32,8 +32,8 @@ var madLibs = [{
     madLib: "   You escape the spellbinding effect of the Lotus Eaters. You land near <strong>%s</strong> Island, a\n"+
             "location near the Cyclopes. After going <strong>%s</strong> on the Cyclopes' island, you end up getting\n" +
             "captured by Polyphemus. Within 12 hours of meeting Polyphemus he eats <strong>%s</strong> of your men. The\n" +
-            "need to escape is dire. After gathering some materials, you fashion a giant <strong>%s</strong> and stab it into\n " +
-            "his eye. You then escape and tell Polyphemus your name is <strong>%s</strong>.\n\n",
+            "need to escape is dire. After gathering some materials, you fashion a giant <strong>%s</strong> and stab\n " +
+            " it into his eye. You then escape and tell Polyphemus your name is <strong>%s</strong>.\n\n",
     answers:[{
       answerText: "Noun (Plural or singular)",
     },{
@@ -69,11 +69,11 @@ var madLibs = [{
 },{
     _id: 3,
     title: "Hades",
-    madLib: "   Unfortunately only your ship escapes the Laestrygonian's onslaught of <strong>%s</strong> throwing. After saving\n"+
-            "your men from being turned into <strong>%s</strong> for the rest of their lives due to the witch Circe, she tells you\n"+
-            "that you must go to Hades to and speak to <strong>%s</strong> to find your way home. You rally your men and follow the\n"+
-            "instructions that Circe gave you to reach the underworld. After performing the rituals, you end up talking with\n"+
-            "<strong>%s</strong>. (S)He tells you of a(n) <strong>%s</strong> that <strong>%ss</strong> a lot.\n\n",
+    madLib: "   Unfortunately only your ship escapes the Laestrygonian's onslaught of <strong>%s</strong> throwing. After\n"+
+            "saving your men from being turned into <strong>%s</strong> for the rest of their lives due to the witch Circe,\n"+
+            "she tells you that you must go to Hades to and speak to <strong>%s</strong> to find your way home. You rally\n"+
+            "your men and follow the instructions that Circe gave you to reach the underworld. After performing the rituals,\n"+
+            "you end up talking with <strong>%s</strong>. (S)He tells you of a(n) <strong>%s</strong> that <strong>%ss</strong> a lot.\n\n",
     answers:[{
       answerText: "Singular noun",
     },{
@@ -90,9 +90,9 @@ var madLibs = [{
 },{
     _id: 4,
     title: "The Sirens",
-    madLib: "   On your way back to Ithaca you must pass the <strong>%s</strong> sirens. You have the option to stuff everyone's\n"+
-            "ears with wax including your own, or you can have your men tie you up while you <strong>%s</strong> to the siren's\n"+
-            "song. You end up <strong>%s</strong> to the song and pass without problem.\n\n",
+    madLib: "   On your way back to Ithaca you must pass the <strong>%s</strong> sirens. You have the option to stuff\n"+
+            "everyone's ears with wax including your own, or you can have your men tie you up while you <strong>%s</strong>\n"+
+            "to the siren's song. You end up <strong>%s</strong> to the song and pass without problem.\n\n",
     answers:[{
       answerText: "Adjective"
     },{
@@ -103,11 +103,12 @@ var madLibs = [{
   },{
     _id: 5,
     title: "Calypso",
-    madLib: "   After passing the Sirens, Scylla and Charybdis, your men <strong>%s</strong> and slaughter Helio's cattle. You\n"+
-            "and your men are then punished by <strong>%s</strong> with a great storm in which only you survive. You wash up on\n"+
-            "Calypso's island. Calypso is quite into you. She asks you,\"Would you like a <strong>%s</strong>?\" You reply,\"No\n"+
-            "thank you, I'm <strong>%s</strong>.\" After what seems like a billion offers, you finally accept to stay with her.\n"+
-            "After <strong>%s</strong> years have passed, the great <strong>%s</strong> decide to convince Calypso to let you go.\n\n",
+    madLib: "   After passing the Sirens, Scylla and Charybdis, your men <strong>%s</strong> and slaughter Helio's cattle.\n"+
+            "You and your men are then punished by <strong>%s</strong> with a great storm in which only you survive. You wash\n"+
+            "up on Calypso's island. Calypso is quite into you. She asks you,\"Would you like a <strong>%s</strong>?\" You\n"+
+            "reply,\"No thank you, I'm <strong>%s</strong>.\" After what seems like a billion offers, you finally accept to\n"+
+            "stay with her. After <strong>%s</strong> years have passed, the great <strong>%s</strong> decide to convince\n" +
+            "Calypso to let you go.\n",
     answers:[{
       answerText: "Present tense verb"
     },{
@@ -124,9 +125,10 @@ var madLibs = [{
   },{
     _id: 6,
     title: "Ithica",
-    madLib: "   You have finally returned to Ithica. You disguise yourself as a <strong>%s</strong> <strong>%s</strong> so that you can see\n"+
-            "who has been loyal to you. After proving that you are Odysseus by shooting a <strong>%s</strong> through 12 <strong>%s</strong>,\n"+
-            "you decide to <strong>%s</strong> all the suitors and take back you place as <strong>%s</strong> in Ithaca.\n\n",
+    madLib: "   You have finally returned to Ithica. You disguise yourself as a <strong>%s</strong> <strong>%s</strong> so\n"+
+            "that you can see who has been loyal to you. After proving that you are Odysseus by shooting a <strong>%s</strong>\n"+
+            "through 12 <strong>%s</strong>,you decide to <strong>%s</strong> all the suitors and take back you place as <strong>%s</strong>\n" + 
+            " in Ithaca.\n",
     answers:[{
       answerText: "Adjective",
     },{

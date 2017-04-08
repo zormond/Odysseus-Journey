@@ -7,7 +7,7 @@ var wordList = "";
 var getRandomWords = function(resolve){
     $.get('/randomWords',function(data){
         randomWords = data;
-        console.log(data);
+        
           for(var i = 0; i < randomWords.length; i++){ //Create list from getting random words.
             wordList +="<li>" + randomWords[i] + "</li>";
           }
@@ -15,14 +15,14 @@ var getRandomWords = function(resolve){
         {
             resolve();
         }
-        console.log(wordList);
+        
     });
 };
 
 var getRandomWordsWithoutResolve =function(){
         $.get('/randomWords',function(data){
         newWords = data;
-        console.log(newWords);
+        
           for(var i = 0; i < newWords.length; i++){ //Create list from getting random words.
             wordList +="<li>" + newWords[i] + "</li>";
           }
@@ -37,7 +37,7 @@ These live functions are used to animations throughout the project.*/
 var people = [];
 $('#newWordsButton').live('click',function(){
     $('.words').slideUp('fast',function(){
-        console.log("i got clicked");
+        
         wordList = [];
         randomWords = "";
         newList = getRandomWordsWithoutResolve();
@@ -48,7 +48,7 @@ $('#searchBar').live('keyup',function(index)
 {
     var value = $('#searchBar').val();
     var users = $('.user');
-    console.log(value);
+    
     for(var i = 0; i < people.length; i++)
     {
         if(!people[i].includes(value.toUpperCase(),0))
@@ -74,7 +74,7 @@ $('.user').live('click',function(index){
 });
 
 $('.user').live('mouseover', function(index){
-        console.log(index);
+        
         var toShow ="#" + index.currentTarget.firstElementChild.id;
         var mine ="#" + index.currentTarget.id;
         if($(toShow).css('display') == 'none')
@@ -181,9 +181,9 @@ var thankyouSwal = function(result){
 var getAllStories = function(){
     $.get('/totalMadLibs',function(data){
         var jsonData = data;
-        console.log(jsonData);
+        
         var totalHtml = '<input id="searchBar" type="text" placeHolder="Search by name"><ul>';
-        console.log(jsonData.length);
+        
         for(var i = 0; i < jsonData.length; i++)
         {
             people.push(jsonData[i].user.toUpperCase());
@@ -194,11 +194,12 @@ var getAllStories = function(){
                             '</li>';
         }
         totalHtml += '</ul>';
-        console.log(people);
+        
         swal({
             title: 'Other Stories:',
             html: totalHtml,
             width: 'auto',
+            confirmButtonColor: '#49483E',
             customClass: 'swal-wide',
             background: '#332106 url(../oldPaper.jpg)',
             allowOutsideClick: false,
@@ -218,6 +219,7 @@ var onwardSwal = function(result){
         background: '#332106 url(../oldPaper.jpg)',
         allowOutsideClick: false,
         allowEscapeKey: false,
+        confirmButtonColor: '#49483E',        
     };
 };
 
@@ -229,6 +231,7 @@ var getSwalStop = function(name){
     });
         return{
         title:name,
+        confirmButtonColor: '#49483E',        
         html: createMadLibInput(madLibs[stopCount]),
         background: '#332106 url(../oldPaper.jpg)',
         preConfirm: function () {//Dynamically create inputs to resolve.
@@ -236,7 +239,7 @@ var getSwalStop = function(name){
             for(var i = 0; i < madLibs[stopCount].answers.length; i++)
             {
                 var id = "#swal-input" + String(i+1);
-                resolveArray.push($(id).val();
+                resolveArray.push($(id).val());
             }
             resolve(resolveArray);
             resolveArray = [];
