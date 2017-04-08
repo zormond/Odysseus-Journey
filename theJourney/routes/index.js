@@ -41,8 +41,6 @@ var madLibs = [{
     },{
       answerText: "Number"
     },{
-      answerText: "Adjective"
-    },{
       answerText: "Noun"
     },{
       answerText: "Name of person"
@@ -53,7 +51,7 @@ var madLibs = [{
     madLib: "   After almost making it home, your men open a bag of <strong>%s</strong> which blows you back. You end up\n"+
             "in the land of the Laestrygonians. You disembark and send <strong>%s</strong> men to find the inhabitants. These\n"+
             "men go and implore a <strong>%s</strong> woman to tell them the whereabouts of the king. To their horror the\n" +
-            "<strong>%s</strong> king takes one of them and makes dinner of him. As you try to escape a <strong>%s</strong> <strong>%s</strong>s\n"+ 
+            "<strong>%s</strong> king takes one of them and makes dinner of him. As you try to escape a <strong>%s</strong><strong>%ss</strong>\n"+ 
             "you. Luckily, you make it back to your ship and sail off.\n\n", 
     answers:[{
       answerText: "Plural noun",
@@ -74,8 +72,8 @@ var madLibs = [{
     madLib: "   Unfortunately only your ship escapes the Laestrygonian's onslaught of <strong>%s</strong> throwing. After saving\n"+
             "your men from being turned into <strong>%s</strong> for the rest of their lives due to the witch Circe, she tells you\n"+
             "that you must go to Hades to and speak to <strong>%s</strong> to find your way home. You rally your men and follow the\n"+
-            "instructions that Circe gave you to reach the underworld. After performing the rituals, you end up talking with <strong>%s</strong>.\n"+
-            "He tells you of a <strong>%s</strong> that <strong>%s</strong>s a lot.\n\n",
+            "instructions that Circe gave you to reach the underworld. After performing the rituals, you end up talking with\n"+
+            "<strong>%s</strong>. (S)He tells you of a(n) <strong>%s</strong> that <strong>%ss</strong> a lot.\n\n",
     answers:[{
       answerText: "Singular noun",
     },{
@@ -106,7 +104,7 @@ var madLibs = [{
     _id: 5,
     title: "Calypso",
     madLib: "   After passing the Sirens, Scylla and Charybdis, your men <strong>%s</strong> and slaughter Helio's cattle. You\n"+
-            "and your are then punished by <strong>%s</strong> with a great storm in which only you survive. You wash up on\n"+
+            "and your men are then punished by <strong>%s</strong> with a great storm in which only you survive. You wash up on\n"+
             "Calypso's island. Calypso is quite into you. She asks you,\"Would you like a <strong>%s</strong>?\" You reply,\"No\n"+
             "thank you, I'm <strong>%s</strong>.\" After what seems like a billion offers, you finally accept to stay with her.\n"+
             "After <strong>%s</strong> years have passed, the great <strong>%s</strong> decide to convince Calypso to let you go.\n\n",
