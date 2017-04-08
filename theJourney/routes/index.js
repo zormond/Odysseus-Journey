@@ -30,7 +30,7 @@ var madLibs = [{
     _id: 1,
     title: "Polyphemus",
     madLib: "   You escape the spellbinding effect of the Lotus Eaters. You land near <strong>%s</strong> Island, a\n"+
-            "location near the Cyclopes. After going <strong>%s</strong> on the Cyclopes' island and you end up getting\n" +
+            "location near the Cyclopes. After going <strong>%s</strong> on the Cyclopes' island, you end up getting\n" +
             "captured by Polyphemus. Within 12 hours of meeting Polyphemus he eats <strong>%s</strong> of your men. The\n" +
             "need to escape is dire. After gathering some materials, you fashion a giant <strong>%s</strong> and stab it into\n " +
             "his eye. You then escape and tell Polyphemus your name is <strong>%s</strong>.\n\n",
@@ -51,8 +51,8 @@ var madLibs = [{
     madLib: "   After almost making it home, your men open a bag of <strong>%s</strong> which blows you back. You end up\n"+
             "in the land of the Laestrygonians. You disembark and send <strong>%s</strong> men to find the inhabitants. These\n"+
             "men go and implore a <strong>%s</strong> woman to tell them the whereabouts of the king. To their horror the\n" +
-            "<strong>%s</strong> king takes one of them and makes dinner of him. As you try to escape a <strong>%s</strong><strong>%ss</strong>\n"+ 
-            "you. Luckily, you make it back to your ship and sail off.\n\n", 
+            "<strong>%s</strong> king takes one of them and makes dinner of him. As you try to escape a <strong>%s</strong>\n"+ 
+            "<strong>%ss</strong> you. Luckily, you make it back to your ship and sail off.\n\n", 
     answers:[{
       answerText: "Plural noun",
     },{
