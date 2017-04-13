@@ -7,6 +7,8 @@ $(document).ready(function(){
     $("#music")[0].volume = .05;
 });
 
+
+
 var madLibs;
 var stopCount = 0; 
 var totalResult = []; 
@@ -14,6 +16,7 @@ var boatSounds;
 function onDataRecieved(response) {
 
     madLibs = JSON.parse(response);
+    
     /*Initialize variables.*/
     var sailTime = 300;     var myAnswers = [];     var myShip = $("#ship");    var endPointX = 0;           var endPointY = 0;
     var angle1 = 0;         var angle2 = 0;         var wH = $(window).height(); var wW = $(window).width();

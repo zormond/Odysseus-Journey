@@ -7,7 +7,7 @@ var wordList = "";
 var getRandomWords = function(resolve){
     $.get('/randomWords',function(data){
         randomWords = data;
-        console.log(data);
+        
           for(var i = 0; i < randomWords.length; i++){ //Create list from getting random words.
             wordList +="<li>" + randomWords[i] + "</li>";
           }
@@ -15,14 +15,14 @@ var getRandomWords = function(resolve){
         {
             resolve();
         }
-        console.log(wordList);
+        
     });
 };
 
 var getRandomWordsWithoutResolve =function(){
         $.get('/randomWords',function(data){
         newWords = data;
-        console.log(newWords);
+        
           for(var i = 0; i < newWords.length; i++){ //Create list from getting random words.
             wordList +="<li>" + newWords[i] + "</li>";
           }
@@ -37,7 +37,7 @@ These live functions are used to animations throughout the project.*/
 var people = [];
 $('#newWordsButton').live('click',function(){
     $('.words').slideUp('fast',function(){
-        console.log("i got clicked");
+        
         wordList = [];
         randomWords = "";
         newList = getRandomWordsWithoutResolve();
@@ -48,7 +48,7 @@ $('#searchBar').live('keyup',function(index)
 {
     var value = $('#searchBar').val();
     var users = $('.user');
-    console.log(value);
+    
     for(var i = 0; i < people.length; i++)
     {
         if(!people[i].includes(value.toUpperCase(),0))
@@ -74,7 +74,7 @@ $('.user').live('click',function(index){
 });
 
 $('.user').live('mouseover', function(index){
-        console.log(index);
+        
         var toShow ="#" + index.currentTarget.firstElementChild.id;
         var mine ="#" + index.currentTarget.id;
         if($(toShow).css('display') == 'none')
@@ -87,6 +87,15 @@ $('.user').live('mouseout', function(index){
         var mine ="#" + index.currentTarget.id;
         $(mine).css("opacity", "1"); 
     });
+
+$("#signOutButton").live('click', function(){
+    $.get('/signout',function(data){
+        
+        if(data.msg === "redirect"){
+            window.location = data.redirectTo;
+        }
+    });
+})
 /*#######################################################################
 //Helper functions for creating madLibs.*/
 
@@ -101,20 +110,22 @@ var addToTotalResult = function(answers){
 var createMadLibInput = function(currentMadLib){
 
         var totalInputs = "<div class='container-fluid'><div class='row'><div id='myInputs' class='col-xs-4 col-sm-4 col-md-4 col-lg-4'>";
+        
         for(var i = 0; i < currentMadLib.answers.length; i++)
         {
             var id = 'swal-input' + String(i+1);  
             totalInputs += '<input id="' +id + '" class="swal2-input" placeHolder="' + currentMadLib.answers[i].answerText + '">';
         }
         totalInputs += "</div>" + //Create html for random words.
-                        "<div class='col-xs-8 col-sm-8 col-md-8 col-lg-8'>" + 
+                        "<div class='col-xs-7 col-sm-7 col-md-7 col-lg-7'>" + 
                             "<div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'>" + 
                                 "<ul class='words'>"+wordList + "</ul>" +  
                             "<button id='newWordsButton' class='btn btn-default'>New Words</button></div>" +  
+                        "</div><div class='col-xs-1 col-sm-1 col-md-1 col-lg-1'><button id='signOutButton' class='btn btn-sm btn-danger'>Sign Out</button>"+
                         "</div>"+
-                        "</div></div>";
+                            "</div></div>";
         return totalInputs;       
-};
+}
 
 /*/###########################################################
 //Swal functions. These are the basic templates for the swal functions that are used throughout.*/
@@ -181,9 +192,9 @@ var thankyouSwal = function(result){
 var getAllStories = function(){
     $.get('/totalMadLibs',function(data){
         var jsonData = data;
-        console.log(jsonData);
+        
         var totalHtml = '<input id="searchBar" type="text" placeHolder="Search by name"><ul>';
-        console.log(jsonData.length);
+        
         for(var i = 0; i < jsonData.length; i++)
         {
             people.push(jsonData[i].user.toUpperCase());
@@ -194,7 +205,7 @@ var getAllStories = function(){
                             '</li>';
         }
         totalHtml += '</ul>';
-        console.log(people);
+        
         swal({
             title: 'Other Stories:',
             html: totalHtml,
@@ -236,7 +247,7 @@ var getSwalStop = function(name){
             for(var i = 0; i < madLibs[stopCount].answers.length; i++)
             {
                 var id = "#swal-input" + String(i+1);
-                resolveArray.push($(id).val();
+                resolveArray.push($(id).val());
             }
             resolve(resolveArray);
             resolveArray = [];
